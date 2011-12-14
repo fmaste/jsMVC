@@ -605,7 +605,7 @@ jsMVC.image.getUri = function (imageFile) {
 	return jsMVC.config.prefix + 
 		jsMVC.image.prefix +
 		"/" + 
-		imageFile.replace('.', '/') + 
+		imageFile + 
 		jsMVC.image.suffix + 
 		jsMVC.config.suffix;
 };
