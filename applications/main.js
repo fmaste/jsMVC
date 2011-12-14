@@ -23,6 +23,18 @@ jsMVC.controller.application.Class({
 		//TODO
 	}
 
+	this.getMainView = function () {
+		return "main";
+	}
+
+	this.getMainStyles = function () {
+		return ["main1", "main2"];
+	}
+
+	this.getMainController = function () {
+			return "main";
+	}
+
 	this.onLoad = function () {
 		// Libs loaded, translations loaded, styles loaded, etc.
 		// About to render all the views.
@@ -33,11 +45,5 @@ jsMVC.controller.application.Class({
 		// Finished rendering all the views.
 	}
 
-	this.getMain = function () {
-		return {
-			view: "main",
-			controller: "main"
-		};
-	}
-
 });
+

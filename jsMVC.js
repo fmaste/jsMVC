@@ -53,8 +53,17 @@ jsMVC.init.application = function (containerSelector, applicationName, construct
 		} else if (application.languageCode && typeof(application.languageCode) === 'string') {
 			jsMVC.document.setLanguageCode(application.languageCode);
 		}
-		// Render all the views.
+		// Create the main view element to start processing
+		var mainView = application.getMainView();
+		// TODO: Add styles!
+		// Should be something like this: <div id="mainViewContainer1" class="jsMVC-view" data-jsMVC-view="main" data-jsMVC-style="main1,main2" style="display: inline; float: left;">
+		var mainStyles = application.getMainStyles();
 		// TODO: A root view has no parent controller? Must have the application controller!.
+		var mainController = application.getMainView();
+		containerSelector.append("<div class=\"jsMVC-view\" data-jsMVC-view=\"" + mainView + "\"></div>");
+		// Render all the views.
+		// Hint: <!-- View content from view "main.html" with controller "main.js "will be placed here. -->
+		// Hint: <!-- Also styles main1.css and main2.css will be applied to the entire page. -->
 		jsMVC.render(
 			containerSelector
 		).done(function (includedViews) {
