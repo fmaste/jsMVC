@@ -1,6 +1,6 @@
 {
 	"debug": true,
-	"prefix": "",
+	"prefix": "applications/demo/simple/",
 	"suffix": "",
 	"model": {
 		"prefix": "model",
@@ -53,7 +53,7 @@
 	"controller": {
 		"application": {
 			"name": "main",
-			"prefix": "applications",
+			"prefix": "",
 			"suffix": ".js",
 			"delayMin": 1000,
 			"delayMax": 1000
