@@ -759,6 +759,9 @@ jsMVC.library.delayMax = 0;
 
 // Load and execute a script, returns a deferred object. If the second parameter is True the execution is blocking!
 // TODO: Separate download from execution, see controlJS, from Steve Souders website.
+// When a script is added the browser blocks until it is downloaded, parsed and ran.
+// It part of the specification to avoid dependency conclicts.
+// jQuery('head').append('<script type="text/javascript" src="' + scriptUri + '"></script>');
 jsMVC.library.load = function (scriptUri, sync) {
 	// The deferred to return.
 	var deferred = jQuery.Deferred();
@@ -799,10 +802,6 @@ jsMVC.library.load = function (scriptUri, sync) {
 	// Return the promise only.
 	return deferred.promise();
 };
-
-// When a script is added the browser blocks until it is downloaded, parsed and ran.
-// It part of the specification to avoid dependency conclicts.
-// jQuery('head').append('<script type="text/javascript" src="' + scriptUri + '"></script>');
 
 // CLASSES
 // ****************************************************************************
