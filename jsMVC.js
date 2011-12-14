@@ -14,17 +14,12 @@ $.noConflict();
 
 // The first function that must be called to start the framework.
 jsMVC.init = function () {
-	var applicationsToInclude = [];
 	jQuery("body").find('.jsMVC-application').each(function () {
 			var elemToIncludeApplication = jQuery(this);
 			var applicationNameToInclude = elemToIncludeApplication.attr("data-jsMVC-application");
 			if (applicationNameToInclude !== undefined) { // TODO: check isString
 				// TODO: Application constructor parameters!
 				jsMVC.init.application(elemToIncludeApplication, applicationNameToInclude, []);
-				applicationsToInclude.push({
-					"selector": elemToIncludeApplication,
-					"name": applicationNameToInclude
-				});
 			} else {
 				// TODO: Not too usefull message.
 				var id = elemToIncludeApplication.attr("id");
@@ -32,7 +27,6 @@ jsMVC.init = function () {
 				jsMVC.error.log("Tag " + tagName + (id ? " with id " + id : "") + " has no application key.");
 			}
 	});
-	return applicationsToInclude;
 };
 
 // Loads and parses the default config, creates the application controller and calls the onLoad method of it when finished
