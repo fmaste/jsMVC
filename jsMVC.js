@@ -21,7 +21,8 @@ jsMVC.init = function () {
 		// TODO: Application constructor parameters!
 		jsMVC.init.application(elemToIncludeApplication, applicationNameToInclude, []);
 	}).fail(function (jqXHR, textStatus, errorThrown) {
-		// TODO: Do something on config load fail.
+		// TODO: Do visually something on config load fail.
+		// The config load already shows an error message.
 	});
 };
 
