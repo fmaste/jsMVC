@@ -72,7 +72,7 @@ jsMVC.init.application = function (containerSelector, applicationName, construct
 			}
 		});
 	}).fail(function (jqXHR, textStatus, errorThrown) {
-		// TODO: Do something on application load fail.
+		// TODO: Do visually something on application load fail.
 	});
 };
 
