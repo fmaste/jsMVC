@@ -287,6 +287,7 @@ jsMVC.config.parse = function (jsonConfig) {
 		if (imageConfig.delayMax) {
 			jsMVC.image.delayMax = imageConfig.delayMax;
 		}
+		// TODO: Preloaded images!
 	}
 	// Source
 	if (jsonConfig.source) {
