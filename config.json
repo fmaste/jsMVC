@@ -52,6 +52,7 @@
 	},
 	"controller": {
 		"application": {
+			"name": "main",
 			"prefix": "applications",
 			"suffix": ".js",
 			"delayMin": 1000,

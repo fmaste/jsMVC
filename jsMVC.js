@@ -14,18 +14,14 @@ $.noConflict();
 
 // The first function that must be called to start the framework.
 jsMVC.init = function () {
-	jQuery("body").find('.jsMVC-application').each(function () {
-			var elemToIncludeApplication = jQuery(this);
-			var applicationNameToInclude = elemToIncludeApplication.attr("data-jsMVC-application");
-			if (applicationNameToInclude !== undefined) { // TODO: check isString
-				// TODO: Application constructor parameters!
-				jsMVC.init.application(elemToIncludeApplication, applicationNameToInclude, []);
-			} else {
-				// TODO: Not too usefull message.
-				var id = elemToIncludeApplication.attr("id");
-				var tagName = elemToIncludeApplication[0].nodeName;
-				jsMVC.error.log("Tag " + tagName + (id ? " with id " + id : "") + " has no application key.");
-			}
+	// TODO: ¿¿¿¿ Take the config from the application controller ????
+	jsMVC.config.load().done(function() {
+		var elemToIncludeApplication = jQuery("body");
+		var applicationNameToInclude = jsMVC.controller.application.name;
+		// TODO: Application constructor parameters!
+		jsMVC.init.application(elemToIncludeApplication, applicationNameToInclude, []);
+	}).fail(function (jqXHR, textStatus, errorThrown) {
+		// TODO: Do something on config load fail.
 	});
 };
 
@@ -34,50 +30,45 @@ jsMVC.init = function () {
 // No translations happens on the containerSelector, translations must be inside a view.
 // When finished rendering all the views the application's onViewsLoad method is called.
 jsMVC.init.application = function (containerSelector, applicationName, constructorParameters) {
-	// TODO: ¿¿¿¿ Take the config from the application controller ????
-	jsMVC.config.load().done(function() {
-		jsMVC.controller.application.load(applicationName).done(function (application) {
-			// Set the active applications to container. // TODO: Listen the onremove ??
-			jQuery(containerSelector).data("data-jsMVC-application", application);
-			// Call the application init method.
-			jsMVC.classes.initInstance(application, constructorParameters);
-			// Set html title.
-			if (application.getTitle !== undefined && jQuery.isFunction(application.getTitle)) {
-				jsMVC.document.setTitle(application.getTitle());
-			} else if (application.title && typeof(application.title) === 'string') {
-				jsMVC.document.setTitle(application.title);
+	jsMVC.controller.application.load(applicationName).done(function (application) {
+		// Set the active applications to container. // TODO: Listen the onremove ??
+		jQuery(containerSelector).data("data-jsMVC-application", application);
+		// Call the application init method.
+		jsMVC.classes.initInstance(application, constructorParameters);
+		// Set html title.
+		if (application.getTitle !== undefined && jQuery.isFunction(application.getTitle)) {
+			jsMVC.document.setTitle(application.getTitle());
+		} else if (application.title && typeof(application.title) === 'string') {
+			jsMVC.document.setTitle(application.title);
+		}
+		// Set favicon.
+		if (application.getFavIcon !== undefined && jQuery.isFunction(application.getFavIcon)) {
+			jsMVC.document.setFavIcon(application.getFavIcon());
+		} else if (application.favIcon && typeof(application.favIcon) === 'string') {
+			jsMVC.document.setFavIcon(application.favIcon);
+		}
+		// Set the document language code.
+		if (application.getLanguageCode !== undefined && jQuery.isFunction(application.getLanguageCode)) {
+			jsMVC.document.setLanguageCode(application.getLanguageCode());
+		} else if (application.languageCode && typeof(application.languageCode) === 'string') {
+			jsMVC.document.setLanguageCode(application.languageCode);
+		}
+		// Render all the views.
+		// TODO: A root view has no parent controller? Must have the application controller!.
+		jsMVC.render(
+			containerSelector
+		).done(function (includedViews) {
+			// Add all the views to the applications controller.
+			for (var key in includedViews) {
+				// TODO: includedViews[key].name; includedViews[key].selector;
 			}
-			// Set favicon.
-			if (application.getFavIcon !== undefined && jQuery.isFunction(application.getFavIcon)) {
-				jsMVC.document.setFavIcon(application.getFavIcon());
-			} else if (application.favIcon && typeof(application.favIcon) === 'string') {
-				jsMVC.document.setFavIcon(application.favIcon);
+			// Call the application onLoad method.
+			if (application.onLoad !== undefined  && jQuery.isFunction(application.onLoad)) {
+				application.onLoad();
 			}
-			// Set the document language code.
-			if (application.getLanguageCode !== undefined && jQuery.isFunction(application.getLanguageCode)) {
-				jsMVC.document.setLanguageCode(application.getLanguageCode());
-			} else if (application.languageCode && typeof(application.languageCode) === 'string') {
-				jsMVC.document.setLanguageCode(application.languageCode);
-			}
-			// Render all the views.
-			// TODO: A root view has no parent controller? Must have the application controller!.
-			jsMVC.render(
-				containerSelector
-			).done(function (includedViews) {
-				// Add all the views to the applications controller.
-				for (var key in includedViews) {
-					// TODO: includedViews[key].name; includedViews[key].selector;
-				}
-				// Call the application onLoad method.
-				if (application.onLoad !== undefined  && jQuery.isFunction(application.onLoad)) {
-					application.onLoad();
-				}
-			});
-		}).fail(function (jqXHR, textStatus, errorThrown) {
-			// TODO: Do something on application load fail.
 		});
 	}).fail(function (jqXHR, textStatus, errorThrown) {
-		// TODO: Do something on config load fail.
+		// TODO: Do something on application load fail.
 	});
 };
 
@@ -311,6 +302,10 @@ jsMVC.config.parse = function (jsonConfig) {
 		// Application
 		if (controllerConfig.application) {
 			var applicationConfig = controllerConfig.application;
+			// Name
+			if (applicationConfig.name) {
+				jsMVC.controller.application.name = applicationConfig.name;
+			}
 			// Prefix
 			if (applicationConfig.prefix) {
 				jsMVC.controller.application.prefix = applicationConfig.prefix;
@@ -917,6 +912,9 @@ jsMVC.Class = function (classMetadata, classConstructor) {
 // APPLICATION CONTROLLER
 // ****************************************************************************
 // ****************************************************************************
+
+// The application to load on init.
+jsMVC.controller.application.name = "";
 
 // The path prefix to get the server files.
 // Can be overrided with the config file.
