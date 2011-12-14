@@ -390,6 +390,7 @@ jsMVC.utils.createRandomString = function (length) {
 	return randomstring;
 };
 
+// Allows to add deferreds to a deferred and then get a deferred that waits for all of them.
 jsMVC.utils.DynamicWhen = function () {
 	var when = undefined;
 
