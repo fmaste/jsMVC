@@ -1,0 +1,36 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=utf-8"></meta>
+		<title></title>
+		<!-- Styles needed for your initial body here!. Better performance: Put styles on top. -->
+	</head>
+	<body> 	<!-- TODO: body class="jsMVC-application" -->
+		<div id="mainApplicationContainer" class="jsMVC-application" data-jsMVC-application="main">
+			<div id="mainViewContainer1" class="jsMVC-view" data-jsMVC-view="main" data-jsMVC-style="main1,main2" style="display: inline; float: left;">
+				<!-- View content from view "main.html" with controller "main.js "will be placed here. -->
+				<!-- Also styles main1.css and main2.css will be applied to the entire page. -->
+			</div>
+			<div id="mainViewContainer2" class="jsMVC-view" data-jsMVC-view="main" data-jsMVC-style="main1,main2" style="display: inline; float: left;">
+				<!-- View content from view "main.html" with controller "main.js "will be placed here. -->
+				<!-- Also styles main1.css and main2.css will be applied to the entire page. -->
+			</div>
+			<div id="mainViewContainer3" class="jsMVC-view" data-jsMVC-view="main" data-jsMVC-style="main1,main2" style="display: inline; float: left;">
+				<!-- View content from view "main.html" with controller "main.js "will be placed here. -->
+				<!-- Also styles main1.css and main2.css will be applied to the entire page. -->
+			</div>
+		</div>
+	</body>
+	<!-- Add scripts needed for the onload event here. Better performance: Put script on the bottom. -->
+	<script type="text/javascript" src="jquery-1.5.min.js"></script>
+	<script type="text/javascript" src="jsMVC.js"></script>
+	<script type="text/javascript">
+		//<![CDATA[
+			jQuery(function() {
+				// Config will be parsed and application "main.js" will be loaded.
+				jsMVC.init();
+			});
+		//]]>
+	</script>
+</html>
+
