@@ -13,12 +13,12 @@ $.noConflict();
 // ****************************************************************************
 
 // The first function that must be called to start the framework.
-jsMVC.init = function (configFileUrl) {
-	if (configFileUrl !== undefined) {
-		if (typeof configFileUrl === "string") {
-			jsMVC.config.uri = configFileUrl;
+jsMVC.init = function (appFolder) {
+	if (appFolder !== undefined) {
+		if (typeof appFolder === "string") {
+			jsMVC.config.prefix = appFolder;
 		} else {
-			jsMVC.error.log("Not a valid config file.");
+			jsMVC.error.log("Not a valid application folder.");
 			return;
 		}
 	}
@@ -124,8 +124,8 @@ jsMVC.error.log = function (msg) {
 // Debug mode on or off.
 jsMVC.config.debug = false;
 
-// Where to find the config file.
-jsMVC.config.uri = "config.json";
+// The config file name.
+jsMVC.config.name = "config.json";
 
 // The main URI prefix.
 jsMVC.config.prefix = "";
@@ -137,7 +137,7 @@ jsMVC.config.suffix = "";
 jsMVC.config.load = function () {
 	var deferred = jQuery.Deferred();
 	jQuery.ajax({
-		url: jsMVC.config.uri, 
+		url: jsMVC.config.prefix + jsMVC.config.name, 
 		dataType: "json", // Evaluates as JSON and returns a JavaScript object. Any malformed JSON is rejected and a parse error is thrown.
 		success: function (jsonConfig) {
 			jsMVC.config.parse(jsonConfig).done(function () {
@@ -167,14 +167,6 @@ jsMVC.config.parse = function (jsonConfig) {
 	// Debug mode.	
 	if (jsonConfig.debug !== undefined) {
 		jsMVC.config.debug = jsonConfig.debug;
-	}
-	// Main uri prefix.
-	if (jsonConfig.prefix !== undefined) {
-		jsMVC.config.prefix = jsonConfig.prefix;
-	}
-	// Main uri suffix.
-	if (jsonConfig.suffix !== undefined) {
-		jsMVC.config.suffix = jsonConfig.suffix;
 	}
 	/*** Them parse first the things that may need to start downloading something. ***/
 	// Style
