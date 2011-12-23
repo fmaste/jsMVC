@@ -13,7 +13,15 @@ $.noConflict();
 // ****************************************************************************
 
 // The first function that must be called to start the framework.
-jsMVC.init = function () {
+jsMVC.init = function (configFileUrl) {
+	if (configFileUrl !== undefined) {
+		if (typeof configFileUrl === "string") {
+			jsMVC.config.uri = configFileUrl;
+		} else {
+			jsMVC.error.log("Not a valid config file.");
+			return;
+		}
+	}
 	// TODO: ¿¿¿¿ Take the config from the application controller ????
 	jsMVC.config.load().done(function() {
 		var elemToIncludeApplication = jQuery("body");
