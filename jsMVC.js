@@ -604,7 +604,7 @@ jsMVC.style.load = function (styleName) {
 
 // The path prefix to get the server files.
 // Can be overrided with the config file.
-jsMVC.image.prefix = "images";
+jsMVC.image.prefix = "images/";
 
 // The path suffix to get the server files.
 // Can be overrided with the config file.
@@ -614,7 +614,6 @@ jsMVC.image.suffix = "";
 jsMVC.image.getUri = function (imageFile) {
 	return jsMVC.config.prefix + 
 		jsMVC.image.prefix +
-		"/" + 
 		imageFile + 
 		jsMVC.image.suffix + 
 		jsMVC.config.suffix;

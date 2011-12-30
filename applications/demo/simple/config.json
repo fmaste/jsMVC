@@ -18,7 +18,7 @@
 		]
 	},
 	"image": {
-		"prefix": "images",
+		"prefix": "images/",
 		"suffix": "",
 		"preload": ["spinner.png"],
 		"delayMin": 1000,
