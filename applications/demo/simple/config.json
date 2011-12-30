@@ -1,7 +1,5 @@
 {
 	"debug": true,
-	"prefix": "applications/demo/simple/",
-	"suffix": "",
 	"model": {
 		"prefix": "model",
 		"suffix": ".php"
