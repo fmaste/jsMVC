@@ -19,7 +19,7 @@ jsMVC.init = function (appFolder) {
 		if (typeof appFolder === "string") {
 			jsMVC.config.prefix = appFolder;
 		} else {
-			jsMVC.error.log("Not a valid application folder.");
+			jsMVC.error.log("The parameter to init must be a string with the Application folder.");
 			return;
 		}
 	}
