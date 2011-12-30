@@ -42,7 +42,7 @@ jsMVC.init = function (appFolder) {
 // When finished all this the application onLoad method is called. 
 // Finally init.view is called with the recently created application controller.
 jsMVC.init.application = function (applicationName, constructorParameters) {
-	var containerSelector = jQuery("body");
+	var containerSelector = jQuery("#jsMVC");
 	// Load the application controller.
 	jsMVC.controller.application.load(applicationName).done(function (application) {
 		// Set the active applications to container. 
@@ -83,7 +83,7 @@ jsMVC.init.application = function (applicationName, constructorParameters) {
 jsMVC.init.view = function (application) {
 	// Render all the views.
 	jsMVC.render(
-		jQuery("body")
+		jQuery("#jsMVC")
 	).done(function (includedViews) {
 		// Add all the views to the applications controller.
 		for (var key in includedViews) {
