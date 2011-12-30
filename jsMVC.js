@@ -995,7 +995,7 @@ jsMVC.controller.application.Class = function (classMetadata, classConstructor) 
 
 // The path prefix to get the server files.
 // Can be overrided with the config file.
-jsMVC.controller.view.prefix = "controllers";
+jsMVC.controller.view.prefix = "controllers/";
 
 // The path suffix to get the server files.
 // Can be overrided with the config file.
@@ -1005,7 +1005,6 @@ jsMVC.controller.view.suffix = ".js";
 jsMVC.controller.view.getUri = function (controllerName) {
 	return jsMVC.config.prefix + 
 		jsMVC.controller.view.prefix + 
-		"/" +
 		controllerName.replace(".", "/") + 
 		jsMVC.controller.view.suffix + 
 		jsMVC.config.suffix;

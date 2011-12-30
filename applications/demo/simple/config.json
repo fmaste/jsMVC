@@ -57,7 +57,7 @@
 			"delayMax": 1000
 		},
 		"view": {
-			"prefix": "controllers",
+			"prefix": "controllers/",
 			"suffix": ".js",
 			"delayMin": 3000,
 			"delayMax": 4000
