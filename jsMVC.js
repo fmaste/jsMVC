@@ -23,7 +23,6 @@ jsMVC.init = function (appFolder) {
 			return;
 		}
 	}
-	// TODO: ¿¿¿¿ Take the config from the application controller ????
 	jsMVC.config.load().done(function() {
 		var elemToIncludeApplication = jQuery("body");
 		var applicationNameToInclude = jsMVC.controller.application.name;
