@@ -29,7 +29,7 @@ jsMVC.init = function (appFolder) {
 	jsMVC.config.load().done(function() {
 		// Initiate the application.
 		// TODO: Application constructor parameters!
-		jsMVC.init.application(jQuery("body"), jsMVC.controller.application.name, []);
+		jsMVC.init.application(jsMVC.controller.application.name, []);
 	}).fail(function (jqXHR, textStatus, errorThrown) {
 		// TODO: Do visually something on config load fail.
 		// The config load already shows an error message.
@@ -39,9 +39,10 @@ jsMVC.init = function (appFolder) {
 // Loads the application controller and calls its constructor method.
 // As provided by the application controller, set page title, favicon and language code.
 // When finished all this the onLoad method is called. 
-// After that, the containerSelector provided is parsed looking for views to include. 
+// After that, the body is parsed looking for views to include. 
 // When finished rendering all the views the application's onViewsLoad method is called.
-jsMVC.init.application = function (containerSelector, applicationName, constructorParameters) {
+jsMVC.init.application = function (applicationName, constructorParameters) {
+	var containerSelector = jQuery("body");
 	// Load the application controller.
 	jsMVC.controller.application.load(applicationName).done(function (application) {
 		// Set the active applications to container. 
