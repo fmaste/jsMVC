@@ -592,13 +592,28 @@ jsMVC.style.getUri = function (styleName) {
 		jsMVC.config.suffix;
 };
 
+// An optional extra delay to use when debugging.
+// Can be overrided with the config file.
+jsMVC.style.delayMin = 0;
+jsMVC.style.delayMax = 0;
+
 // TODO: Use a cache ?
 
 // TODO: Load the stylesheet asynchronically. As text, with an object or new Image().
 jsMVC.style.load = function (styleName) {
 	var deferred = jQuery.Deferred();
 	jQuery('head').append('<link rel="stylesheet" href="' + jsMVC.style.getUri(styleName) + '" type="textcss"></link>');
-	deferred.resolve();
+	// If in debug mode add a delay to the request.
+	if (jsMVC.config.debug) {
+		setTimeout(
+			function () {
+				deferred.resolve();
+			},
+			jsMVC.utils.createRandomNumber(jsMVC.view.delayMin, jsMVC.view.delayMax)
+		);
+	} else {
+		deferred.resolve();
+	}
 	return deferred.promise();
 };
 

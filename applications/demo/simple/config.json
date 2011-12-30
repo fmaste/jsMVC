@@ -15,7 +15,9 @@
 		"suffix": ".css",
 		"globals": [
 			"index"
-		]
+		],
+		"delayMin": 1000,
+		"delayMax": 2000
 	},
 	"image": {
 		"prefix": "images/",
