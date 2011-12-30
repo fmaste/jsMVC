@@ -41,6 +41,7 @@ jsMVC.init = function (appFolder) {
 // No translations happens on the containerSelector, translations must be inside a view.
 // When finished rendering all the views the application's onViewsLoad method is called.
 jsMVC.init.application = function (containerSelector, applicationName, constructorParameters) {
+	// Load the application controller.
 	jsMVC.controller.application.load(applicationName).done(function (application) {
 		// Set the active applications to container. // TODO: Listen the onremove ??
 		jQuery(containerSelector).data("data-jsMVC-application", application);
