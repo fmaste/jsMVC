@@ -194,8 +194,9 @@ jsMVC.config.parse = function (jsonConfig) {
 		// Globals
 		if (styleConfig.globals && jQuery.isArray(styleConfig.globals)) {
 			for (var key in styleConfig.globals) {
-				// TODO: Use dynamic when!!
-				jsMVC.style.load(styleConfig.globals[key]);
+				dynamicWhen.addDeferred(
+					jsMVC.style.load(styleConfig.globals[key])
+				);
 			}
 		}
 	}
@@ -595,7 +596,10 @@ jsMVC.style.getUri = function (styleName) {
 
 // TODO: Load the stylesheet asynchronically. As text, with an object or new Image().
 jsMVC.style.load = function (styleName) {
+	var deferred = jQuery.Deferred();
 	jQuery('head').append('<link rel="stylesheet" href="' + jsMVC.style.getUri(styleName) + '" type="textcss"></link>');
+	deferred.resolve();
+	return deferred.promise();
 };
 
 // IMAGE
