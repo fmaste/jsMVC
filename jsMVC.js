@@ -42,11 +42,10 @@ jsMVC.init = function (appFolder) {
 // When finished all this the application onLoad method is called. 
 // Finally init.view is called with the recently created application controller.
 jsMVC.init.application = function (applicationName, constructorParameters) {
-	var containerSelector = jQuery("#jsMVC");
 	// Load the application controller.
 	jsMVC.controller.application.load(applicationName).done(function (application) {
 		// Set the active applications to container. 
-		jQuery(containerSelector).data("data-jsMVC-application", application);
+		jQuery("#jsMVC").data("data-jsMVC-application", application);
 		// Call the application init method.
 		jsMVC.classes.initInstance(application, constructorParameters);
 		// Set html title from the application controller's method or property.
