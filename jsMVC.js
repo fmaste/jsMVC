@@ -39,7 +39,7 @@ jsMVC.init = function (appFolder) {
 
 // Loads the application controller and calls its constructor method.
 // As provided by the application controller, set page title, favicon and language code.
-// When finished all this the onLoad method is called. 
+// When finished all this the application onLoad method is called. 
 // After that, the body is parsed looking for views to include. 
 // When finished rendering all the views the application's onViewsLoad method is called.
 jsMVC.init.application = function (applicationName, constructorParameters) {
