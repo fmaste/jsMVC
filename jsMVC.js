@@ -882,7 +882,7 @@ jsMVC.classes.initInstance = function (instance, parameters) {
 
 // The path prefix to get the server files.
 // Can be overrided with the config file.
-jsMVC.source.prefix = "src";
+jsMVC.source.prefix = "src/";
 
 // The path suffix to get the server files.
 // Can be overrided with the config file.
@@ -892,7 +892,6 @@ jsMVC.source.suffix = ".js";
 jsMVC.source.getUri = function (className) {
 	return jsMVC.config.prefix + 
 		jsMVC.source.prefix + 
-		"/" +
 		className.replace(".", "/") + 
 		jsMVC.source.suffix + 
 		jsMVC.config.suffix;
