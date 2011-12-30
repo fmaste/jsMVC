@@ -680,7 +680,7 @@ jsMVC.image.load = function (imageUri) {
 
 // The path prefix to get the server files.
 // Can be overrided with the config file.
-jsMVC.translation.prefix = "translations";
+jsMVC.translation.prefix = "translations/";
 
 // The path suffix to get the server files.
 // Can be overrided with the config file.
@@ -690,7 +690,6 @@ jsMVC.translation.suffix = ".json";
 jsMVC.translation.getUri = function (translationName) {
 	return jsMVC.config.prefix + 
 		jsMVC.translation.prefix + 
-		"/" +
 		translationName.replace(".", "/") + 
 		jsMVC.translation.suffix + 
 		jsMVC.config.suffix;
