@@ -24,10 +24,8 @@ jsMVC.init = function (appFolder) {
 		}
 	}
 	jsMVC.config.load().done(function() {
-		var elemToIncludeApplication = jQuery("body");
-		var applicationNameToInclude = jsMVC.controller.application.name;
 		// TODO: Application constructor parameters!
-		jsMVC.init.application(elemToIncludeApplication, applicationNameToInclude, []);
+		jsMVC.init.application(jQuery("body"), jsMVC.controller.application.name, []);
 	}).fail(function (jqXHR, textStatus, errorThrown) {
 		// TODO: Do visually something on config load fail.
 		// The config load already shows an error message.
