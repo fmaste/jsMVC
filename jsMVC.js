@@ -71,6 +71,7 @@ jsMVC.init.application = function (applicationName, constructorParameters) {
 		if (application.onLoad !== undefined  && jQuery.isFunction(application.onLoad)) {
 			application.onLoad();
 		}
+		// Load the main view.
 		jsMVC.init.view(application);
 	}).fail(function (jqXHR, textStatus, errorThrown) {
 		// TODO: Do visually something on application load fail.
