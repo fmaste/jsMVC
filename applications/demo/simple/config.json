@@ -5,7 +5,7 @@
 		"suffix": ".php"
 	},
 	"view": {
-		"prefix": "views",
+		"prefix": "views/",
 		"suffix": ".html",
 		"delayMin": 1000,
 		"delayMax": 2000

@@ -501,7 +501,7 @@ jsMVC.document.translate = function (languageCode) {
 
 // The path prefix to get the server files.
 // Can be overrided with the config file.
-jsMVC.view.prefix = "views";
+jsMVC.view.prefix = "views/";
 
 // The path suffix to get the server files.
 // Can be overrided with the config file.
@@ -511,7 +511,6 @@ jsMVC.view.suffix = ".html";
 jsMVC.view.getUri = function (viewName) {
 	return jsMVC.config.prefix + 
 		jsMVC.view.prefix + 
-		"/" + 
 		viewName.replace(".", "/") + 
 		jsMVC.view.suffix + 
 		jsMVC.config.suffix;
