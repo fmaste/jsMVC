@@ -25,7 +25,9 @@ jsMVC.init = function (appFolder) {
 			return;
 		}
 	}
+	// Load the config.
 	jsMVC.config.load().done(function() {
+		// Initiate the application.
 		// TODO: Application constructor parameters!
 		jsMVC.init.application(jQuery("body"), jsMVC.controller.application.name, []);
 	}).fail(function (jqXHR, textStatus, errorThrown) {
