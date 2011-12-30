@@ -43,7 +43,7 @@ jsMVC.init = function (appFolder) {
 jsMVC.init.application = function (containerSelector, applicationName, constructorParameters) {
 	// Load the application controller.
 	jsMVC.controller.application.load(applicationName).done(function (application) {
-		// Set the active applications to container. // TODO: Listen the onremove ??
+		// Set the active applications to container. 
 		jQuery(containerSelector).data("data-jsMVC-application", application);
 		// Call the application init method.
 		jsMVC.classes.initInstance(application, constructorParameters);
