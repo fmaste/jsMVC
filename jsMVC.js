@@ -14,6 +14,7 @@ $.noConflict();
 
 // The first function that must be called to start the framework.
 jsMVC.init = function (appFolder) {
+	// If no application folder use the root directory.
 	if (appFolder !== undefined) {
 		if (typeof appFolder === "string") {
 			jsMVC.config.prefix = appFolder;
