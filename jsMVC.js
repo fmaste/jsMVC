@@ -214,7 +214,7 @@ jsMVC.config.parse = function (jsonConfig) {
 				var files = localConfig.files;
 				for (var key in files) {
 					dynamicWhen.addDeferred(
-						jsMVC.library.load(jsMVC.config.prefix + jsMVC.library.prefix + "/" + files[key])
+						jsMVC.library.load(jsMVC.config.prefix + jsMVC.library.prefix + files[key])
 					);
 				}
 			}
@@ -751,7 +751,7 @@ jsMVC.translation.addToMain = function (translationName, onFinishCallback) {
 
 // The path prefix to get the server files.
 // Can be overrided with the config file.
-jsMVC.library.prefix = "lib";
+jsMVC.library.prefix = "lib/";
 
 // TODO: suffix
 
