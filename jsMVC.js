@@ -72,21 +72,25 @@ jsMVC.init.application = function (applicationName, constructorParameters) {
 		if (application.onLoad !== undefined  && jQuery.isFunction(application.onLoad)) {
 			application.onLoad();
 		}
-		// Render all the views.
-		jsMVC.render(
-			containerSelector
-		).done(function (includedViews) {
-			// Add all the views to the applications controller.
-			for (var key in includedViews) {
-				// TODO: includedViews[key].name; includedViews[key].selector;
-			}
-			// Call the application onViewsLoad method.
-			if (application.onViewsLoad !== undefined  && jQuery.isFunction(application.onViewsLoad)) {
-				application.onViewsLoad();
-			}
-		});
+		jsMVC.init.view(application);
 	}).fail(function (jqXHR, textStatus, errorThrown) {
 		// TODO: Do visually something on application load fail.
+	});
+};
+
+jsMVC.init.view = function (application) {
+	// Render all the views.
+	jsMVC.render(
+		jQuery("body")
+	).done(function (includedViews) {
+		// Add all the views to the applications controller.
+		for (var key in includedViews) {
+			// TODO: includedViews[key].name; includedViews[key].selector;
+		}
+		// Call the application onViewsLoad method.
+		if (application.onViewsLoad !== undefined  && jQuery.isFunction(application.onViewsLoad)) {
+			application.onViewsLoad();
+		}
 	});
 };
 
