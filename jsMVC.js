@@ -40,8 +40,7 @@ jsMVC.init = function (appFolder) {
 // Loads the application controller and calls its constructor method.
 // As provided by the application controller, set page title, favicon and language code.
 // When finished all this the application onLoad method is called. 
-// After that, the body is parsed looking for views to include. 
-// When finished rendering all the views the application's onViewsLoad method is called.
+// Finally init.view is called with the recently created application controller.
 jsMVC.init.application = function (applicationName, constructorParameters) {
 	var containerSelector = jQuery("body");
 	// Load the application controller.
@@ -78,6 +77,8 @@ jsMVC.init.application = function (applicationName, constructorParameters) {
 	});
 };
 
+// The body is parsed looking for views to include. 
+// When finished rendering all the views the application's onViewsLoad method is called.
 jsMVC.init.view = function (application) {
 	// Render all the views.
 	jsMVC.render(
