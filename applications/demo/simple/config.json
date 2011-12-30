@@ -11,7 +11,7 @@
 		"delayMax": 2000
 	},
 	"style": {
-		"prefix": "css",
+		"prefix": "css/",
 		"suffix": ".css",
 		"globals": [
 			"index"

@@ -576,7 +576,7 @@ jsMVC.view.load = function (viewName) {
 
 // The path prefix to get the server files.
 // Can be overrided with the config file.
-jsMVC.style.prefix = "css";
+jsMVC.style.prefix = "css/";
 
 // The path suffix to get the server files.
 // Can be overrided with the config file.
@@ -586,7 +586,6 @@ jsMVC.style.suffix = ".css";
 jsMVC.style.getUri = function (styleName) {
 	return jsMVC.config.prefix + 
 		jsMVC.style.prefix + 
-		"/" +
 		styleName.replace('.', '/') + 
 		jsMVC.style.suffix + 
 		jsMVC.config.suffix;
