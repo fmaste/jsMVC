@@ -99,23 +99,23 @@ jsMVC.init.view = function (application) {
 // ****************************************************************************
 // ****************************************************************************
 
-jsMVC.error = {};					// Log functions.
-jsMVC.config = {};					// Load and parse the configuration file.
-jsMVC.utils = {};					// Utility functions.
-jsMVC.document = {};				// Utilities to alter the DOM.
-jsMVC.model = {};					// Action requests to the server.
-jsMVC.view = {};					// Load views.
-jsMVC.style = {};					// Load styles.
-jsMVC.image = {};					// Load image.
-jsMVC.translation = {};				// Translation functions.
-jsMVC.library = {};					// Load javascripts.
-jsMVC.classes = {};					// Loading and creating classes with its parents, etc.
-jsMVC.source = {};					// Load and create user created classes.
-jsMVC.controller = {};				// Controllers:
-jsMVC.controller.application = {};	// 		Load and create application controllers (Class).
-jsMVC.controller.view = {};			// 		Load and create view controllers (Class).
-jsMVC.social = {};					// Social plugins:
-jsMVC.social.facebook = {};			// 		Facebook functions and helpers.
+jsMVC.error = {};			// Log functions.
+jsMVC.config = {};			// Load and parse the configuration file.
+jsMVC.utils = {};			// Utility functions.
+jsMVC.document = {};			// Utilities to alter the DOM.
+jsMVC.model = {};			// Action requests to the server.
+jsMVC.view = {};			// Load views.
+jsMVC.style = {};			// Load styles.
+jsMVC.image = {};			// Load image.
+jsMVC.translation = {};			// Translation functions.
+jsMVC.library = {};			// Load javascripts.
+jsMVC.classes = {};			// Loading and creating classes with its parents, etc.
+jsMVC.source = {};			// Load and create user created classes.
+jsMVC.controller = {};			// Controllers:
+jsMVC.controller.application = {};	// Load and create application controllers (Class).
+jsMVC.controller.view = {};		// Load and create view controllers (Class).
+jsMVC.social = {};			// Social plugins:
+jsMVC.social.facebook = {};		// Facebook functions and helpers.
 
 // ERROR
 // ****************************************************************************
