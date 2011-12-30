@@ -13,6 +13,8 @@ $.noConflict();
 // ****************************************************************************
 
 // The first function that must be called to start the framework.
+// The first parameter is the root folder for the application to load.
+// From this folder the config file (as named in jsMVC.config.name) will be loaded.
 jsMVC.init = function (appFolder) {
 	// If no application folder use the root directory.
 	if (appFolder !== undefined) {
