@@ -47,19 +47,19 @@ jsMVC.init.application = function (containerSelector, applicationName, construct
 		jQuery(containerSelector).data("data-jsMVC-application", application);
 		// Call the application init method.
 		jsMVC.classes.initInstance(application, constructorParameters);
-		// Set html title.
+		// Set html title from the application controller's method or property.
 		if (application.getTitle !== undefined && jQuery.isFunction(application.getTitle)) {
 			jsMVC.document.setTitle(application.getTitle());
 		} else if (application.title && typeof(application.title) === 'string') {
 			jsMVC.document.setTitle(application.title);
 		}
-		// Set favicon.
+		// Set favicon from the application controller's method or property.
 		if (application.getFavIcon !== undefined && jQuery.isFunction(application.getFavIcon)) {
 			jsMVC.document.setFavIcon(application.getFavIcon());
 		} else if (application.favIcon && typeof(application.favIcon) === 'string') {
 			jsMVC.document.setFavIcon(application.favIcon);
 		}
-		// Set the document language code.
+		// Set the document language code from the application controller's method or property.
 		if (application.getLanguageCode !== undefined && jQuery.isFunction(application.getLanguageCode)) {
 			jsMVC.document.setLanguageCode(application.getLanguageCode());
 		} else if (application.languageCode && typeof(application.languageCode) === 'string') {
