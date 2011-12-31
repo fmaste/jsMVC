@@ -106,7 +106,7 @@ jsMVC.init.application = function (applicationName, constructorParameters) {
 // When finished rendering all the views the application's onViewsLoad method is called.
 jsMVC.init.view = function (application) {
 	// Render all the views.
-	jsMVC.render(
+	jsMVC.render.processViews(
 		jQuery(jsMVC.controller.application.container)
 	).done(function (includedViews) {
 		// Add all the views to the applications controller.
@@ -1134,30 +1134,7 @@ jsMVC.social.facebook.init = function (appId) {
 // ****************************************************************************
 // ****************************************************************************
 
-// Parses the container looking for nodes with jsMVC-view as class attribute to render.
-// Returns a deferred that resolves with an array of the processed first level views.
-jsMVC.render = function (viewContainerSelector) {
-	// The deferred to return.
-	var deferred = jQuery.Deferred();
-	// The inner views deferred processors.
-	var deferredArray = [];
-	// Render every view thas is founded on viewContainerSelector.
-	var viewsToInclude = jsMVC.render.getViewsToInclude(viewContainerSelector, function (innerViewContainerSelector, innerViewName, controllerName) {
-		// Start processing the inner view.
-		var viewDeferred = jsMVC.render.processView(innerViewContainerSelector, innerViewName, controllerName);
-		// Add it to the deferred queue.
-		deferredArray.push(viewDeferred);
-	});
-	// Wait for all processors.
-	jQuery.when.apply(jQuery, deferredArray).done(function () {
-		// Resolve with an array of {selector, name} objects.
-		deferred.resolve(viewsToInclude);
-	});
-	// Return the promise only.
-	return deferred.promise();
-};
-
-jsMVC.render.processView = function (viewContainerSelector, viewName, controllerName) {
+jsMVC.render = function (viewContainerSelector, viewName, controllerName) {
 	// The deferred to return.
 	var deferred = jQuery.Deferred();
 	// Put a temporal "loading" view using a spinner.
@@ -1177,7 +1154,7 @@ jsMVC.render.processView = function (viewContainerSelector, viewName, controller
 		// After inserting into the DOM start downloading the images asynchronously in parrallel.
 		jsMVC.render.loadImages(viewContainerSelector);
 		// Now start showing its subviews.
-		jsMVC.render(viewContainerSelector).then(function (includedViews) {
+		jsMVC.render.processViews(viewContainerSelector).then(function (includedViews) {
 			// When the subviews are show resolve its deferred.
 			subviewsDeferred.resolve(includedViews);
 		});
@@ -1218,6 +1195,29 @@ jsMVC.render.processView = function (viewContainerSelector, viewName, controller
 				jsMVC.render.includeTranslation(elemToIncludeTranslation, jsMVC.translation.main[translationNameToInclude]);
 			}
 		);
+	});
+	// Return the promise only.
+	return deferred.promise();
+};
+
+// Parses the container looking for nodes with jsMVC-view as class attribute to render.
+// Returns a deferred that resolves with an array of the processed first level views.
+jsMVC.render.processViews = function (viewContainerSelector) {
+	// The deferred to return.
+	var deferred = jQuery.Deferred();
+	// The inner views deferred processors.
+	var deferredArray = [];
+	// Render every view thas is founded on viewContainerSelector.
+	var viewsToInclude = jsMVC.render.getViewsToInclude(viewContainerSelector, function (innerViewContainerSelector, innerViewName, controllerName) {
+		// Start processing the inner view.
+		var viewDeferred = jsMVC.render(innerViewContainerSelector, innerViewName, controllerName);
+		// Add it to the deferred queue.
+		deferredArray.push(viewDeferred);
+	});
+	// Wait for all processors.
+	jQuery.when.apply(jQuery, deferredArray).done(function () {
+		// Resolve with an array of {selector, name} objects.
+		deferred.resolve(viewsToInclude);
 	});
 	// Return the promise only.
 	return deferred.promise();
