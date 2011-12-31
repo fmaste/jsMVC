@@ -1221,7 +1221,7 @@ jsMVC.render.processView = function (viewContainerSelector, viewName, controller
 	});
 	// Return the promise only.
 	return deferred.promise();
-}
+};
 
 jsMVC.render.getViewDeferred = function (viewName) {
 	var deferred = jQuery.Deferred();
