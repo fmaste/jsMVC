@@ -20,13 +20,4 @@ jsMVC.controller.view.Class({
 		this.parent.onLoad();
 	}
 
-	this.renderSubviews = function () {
-	}
-
-	this.dependencies = function () {
-	}
-
-	this.attachCallbacks = function () {
-	}
-
 });

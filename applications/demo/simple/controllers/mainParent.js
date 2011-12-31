@@ -24,13 +24,4 @@ jsMVC.controller.view.Class({
 		this.view.find("#tdToHide").hide();
 	}
 
-	this.renderSubviews = function () {
-	}
-
-	this.dependencies = function () {
-	}
-
-	this.attachCallbacks = function () {
-	}
-
 });
