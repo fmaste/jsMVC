@@ -1150,7 +1150,7 @@ jsMVC.render = function (viewContainerSelector, viewName, controllerName) {
 		// When view is ready alter the image tags so they don't start downloading when inserted into the DOM.
 		var editedViewString = jsMVC.render.alterImages(viewString);
 		// The view string was edited and every img tag was replaced with a placeholder to change the download technique.
-		jsMVC.render.includeView(viewContainerSelector, editedViewString);
+		jQuery(viewContainerSelector).html(editedViewString);
 		// Disable view until controller is ready.
 		jQuery(viewContainerSelector).fadeTo("slow", 0.5);
 		// After inserting into the DOM start downloading the images asynchronously in parrallel.
@@ -1310,10 +1310,6 @@ jsMVC.render.loadImages = function (viewContainerSelector) {
 		});
 	});
 }
-
-jsMVC.render.includeView = function (viewContainerSelector, viewString) {
-	jQuery(viewContainerSelector).html(viewString);
-};
 
 jsMVC.render.getStylesToInclude = function (viewContainerSelector, styleFoundCallback) {
 	// TODO: Transform CSS to local CSS to this view.
