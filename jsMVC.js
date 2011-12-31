@@ -542,14 +542,9 @@ jsMVC.view.load = function (viewName) {
 		// Create the downloader.
 		downloader = jQuery.ajax({
 			url: jsMVC.view.getUri(viewName),
-			dataType: "html", // Returns HTML as plain text; included script tags are evaluated when inserted in the DOM.
-			success: function (stringView) {
-			},
-			error: function (jqXHR, textStatus, errorThrown) {
-				// TODO: Clear queue ?
-				// jsMVC.view.queue[viewName] = undefined;
-				// TODO: Better error message. Use debug mode and apply styles, put a message when dbl click on the view, etc.
-			}
+			// Returns HTML as plain text; 
+			// Included script tags are evaluated when inserted in the DOM.
+			dataType: "html" 
 		});
 		// Fill the queue.
 		jsMVC.view.queue[viewName] = downloader;
