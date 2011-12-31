@@ -202,6 +202,7 @@ jsMVC.config.parse = function (jsonConfig) {
 		// Globals
 		if (styleConfig.globals && jQuery.isArray(styleConfig.globals)) {
 			for (var key in styleConfig.globals) {
+				// TODO: Apply this global styles only to jsMVC.controller.application.container
 				dynamicWhen.addDeferred(
 					jsMVC.style.load(styleConfig.globals[key])
 				);
