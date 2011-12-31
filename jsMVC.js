@@ -140,6 +140,7 @@ jsMVC.error.log = function (msg) {
 // ****************************************************************************
 
 // Debug mode on or off.
+// Can be overrided with the config file.
 jsMVC.config.debug = false;
 
 // The config file name.
