@@ -5,11 +5,11 @@ jsMVC.controller.view.Class({
 	this.init = function () {
 	}
 
-	this.getController = function (viewName) {
-		return null;
+	this.onLoad = function () {
 	}
 
-	this.onLoad = function () {
+	this.getController = function (viewName) {
+		return null;
 	}
 
 });

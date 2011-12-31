@@ -10,6 +10,11 @@ jsMVC.controller.view.Class({
 		this.counter = counter;
 	}
 
+	this.onLoad = function () {
+		jQuery("#firstName").val("CABEZON");
+		this.view.find("#tdToHide").hide();
+	}
+
 	this.addToCounter = function(num) {
 		this.counter += num;
 	}
@@ -17,11 +22,6 @@ jsMVC.controller.view.Class({
 	this.getCounter = function() {
 		alert(this.className + ": getCounter(): " + this.counter);
 		return this.counter;
-	}
-
-	this.onLoad = function () {
-		jQuery("#firstName").val("CABEZON");
-		this.view.find("#tdToHide").hide();
 	}
 
 });

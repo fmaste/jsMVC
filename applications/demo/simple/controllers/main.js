@@ -11,13 +11,13 @@ jsMVC.controller.view.Class({
 		this.parent.init(-2);
 	}
 
+	this.onLoad = function () {
+		this.parent.onLoad();
+	}
+
 	this.getCounter = function () {
 		//alert(this.className + ": getCounter(): " + this.counter);
 		return this.counter + 1;
-	}
-
-	this.onLoad = function () {
-		this.parent.onLoad();
 	}
 
 });
