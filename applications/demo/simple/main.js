@@ -32,9 +32,5 @@ jsMVC.controller.application.Class({
 		// Also styles main1.css and main2.css will be applied to the entire page.
 	}
 
-	this.onViewsLoad = function () {
-		// Finished rendering all the views.
-	}
-
 });
 

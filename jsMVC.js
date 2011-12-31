@@ -97,28 +97,8 @@ jsMVC.init.application = function (applicationName, constructorParameters) {
 		if (application.onLoad !== undefined  && jQuery.isFunction(application.onLoad)) {
 			application.onLoad();
 		}
-		// Load the main view.
-		jsMVC.init.view(application);
 	}).fail(function (jqXHR, textStatus, errorThrown) {
 		// TODO: Do visually something on application load fail.
-	});
-};
-
-// The body is parsed looking for views to include. 
-// When finished rendering all the views the application's onViewsLoad method is called.
-jsMVC.init.view = function (application) {
-	// Render all the views.
-	jsMVC.render.processViews(
-		jQuery(jsMVC.controller.application.container)
-	).done(function (includedViews) {
-		// Add all the views to the applications controller.
-		for (var key in includedViews) {
-			// TODO: includedViews[key].name; includedViews[key].selector;
-		}
-		// Call the application onViewsLoad method.
-		if (application.onViewsLoad !== undefined  && jQuery.isFunction(application.onViewsLoad)) {
-			application.onViewsLoad();
-		}
 	});
 };
 
