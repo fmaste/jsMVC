@@ -1142,9 +1142,9 @@ jsMVC.render = function (viewContainerSelector) {
 	// The inner views deferred processors.
 	var deferredArray = [];
 	// Render every view thas is founded on viewContainerSelector.
-	var viewsToInclude = jsMVC.render.getViewsToInclude(viewContainerSelector, function (innerViewContainerSelector, innerViewName) {
+	var viewsToInclude = jsMVC.render.getViewsToInclude(viewContainerSelector, function (innerViewContainerSelector, innerViewName, controllerName) {
 		// Start processing the inner view.
-		var viewDeferred = jsMVC.render.processView(innerViewContainerSelector, innerViewName);
+		var viewDeferred = jsMVC.render.processView(innerViewContainerSelector, innerViewName, controllerName);
 		// Add it to the deferred queue.
 		deferredArray.push(viewDeferred);
 	});
@@ -1157,7 +1157,7 @@ jsMVC.render = function (viewContainerSelector) {
 	return deferred.promise();
 };
 
-jsMVC.render.processView = function (viewContainerSelector, viewName) {
+jsMVC.render.processView = function (viewContainerSelector, viewName, controllerName) {
 	// The deferred to return.
 	var deferred = jQuery.Deferred();
 	// Put a temporal "loading" view using a spinner.
@@ -1167,7 +1167,7 @@ jsMVC.render.processView = function (viewContainerSelector, viewName) {
 	// Deferred for this view subviews.
 	var subviewsDeferred = jQuery.Deferred();
 	// Load the needed view controller in parallel.
-	var controllerDeferred = jsMVC.render.getViewControllerDeferred(viewName);
+	var controllerDeferred = jsMVC.render.getViewControllerDeferred(controllerName);
 	// As soon as the view is ready show it and start rendering its subviews.
 	viewDeferred.done(function (viewString) {
 		// The view string was edited and every img tag was replaced with a placeholder to change the download technique.
@@ -1239,12 +1239,7 @@ jsMVC.render.getViewDeferred = function (viewName) {
 	return deferred.promise();
 };
 
-jsMVC.render.getViewControllerDeferred = function (viewName) {
-	// TODO: The controller was found on the attribute data-jsMVC-controller. (HTML5 proof)
-	// TODO: Allow to override the controllerName by asking the controller.
-	// TODO: Call a parent controller method with elem, if it returns something use that as controllerName.
-	// If there is no controller name, use the view name.
-	var controllerName = viewName;
+jsMVC.render.getViewControllerDeferred = function (controllerName) {
 	return jsMVC.controller.view.load(controllerName);
 };
 
@@ -1271,8 +1266,10 @@ jsMVC.render.getViewsToInclude = function (viewContainerSelector, viewFoundCallb
 		var elemToIncludeView = jQuery(this);
 		var viewNameToInclude = elemToIncludeView.attr("data-jsMVC-view");
 		if (viewNameToInclude !== undefined) { // TODO: check isString
+			// TODO: Allow to set the controller name with "data-jsMVC-controller"!
+			var controllerNameToUse = viewNameToInclude;
 			if (viewFoundCallback !== undefined && jQuery.isFunction(viewFoundCallback)) {
-				viewFoundCallback(elemToIncludeView, viewNameToInclude);
+				viewFoundCallback(elemToIncludeView, viewNameToInclude, controllerNameToUse);
 			}
 			viewsToInclude.push({
 				"selector": elemToIncludeView,
