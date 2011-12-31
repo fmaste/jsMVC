@@ -20,11 +20,19 @@ jsMVC.init = function (appFolder, appContainer) {
 	if (typeof appFolder === "string") {
 		jsMVC.config.prefix = appFolder;
 	} else {
-		jsMVC.error.log("The parameter to init must be a string with the Application folder.");
+		jsMVC.error.log("The first parameter to init must be a string with the Application folder.");
 		return;
 	}
-	// TODO: Validate the appContainer!
-	jsMVC.controller.application.container = appContainer;
+	if (typeof appContainer === "string") {
+		if (jQuery.find(appContainer).length === 1) {
+			jsMVC.controller.application.container = appContainer;	
+		} else {
+			jsMVC.error.log("The application container selector must match one element.");
+		}
+	} else {
+		jsMVC.error.log("The second parameter to init must be a selector to the application container.");
+		return;
+	}
 	// Load the config.
 	jsMVC.config.load().done(function() {
 		// Initiate the application.
