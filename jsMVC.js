@@ -16,7 +16,7 @@ $.noConflict();
 // The first parameter is the root folder for the application to load.
 // From this folder the config file (as named in config.name) will be loaded.
 // Finally init.application will be called with controller.application.name.
-jsMVC.init = function (appFolder, appContainer) {
+jsMVC.init = function (appFolder, appContainer, appController) {
 	// Set the application folder.
 	if (typeof appFolder === "string") {
 		jsMVC.config.prefix = appFolder;
@@ -34,6 +34,13 @@ jsMVC.init = function (appFolder, appContainer) {
 		}
 	} else {
 		jsMVC.error.log("The second parameter to init must be a selector to the application container.");
+		return;
+	}
+	// Set the application controller.
+	if (typeof appController === "string") {
+		jsMVC.controller.application.name = appController;
+	} else {
+		jsMVC.error.log("The third parameter to init must be the application controller name.");
 		return;
 	}
 	// Load the config.
@@ -337,10 +344,6 @@ jsMVC.config.parse = function (jsonConfig) {
 		// Application
 		if (controllerConfig.application) {
 			var applicationConfig = controllerConfig.application;
-			// Name
-			if (applicationConfig.name) {
-				jsMVC.controller.application.name = applicationConfig.name;
-			}
 			// Prefix
 			if (applicationConfig.prefix) {
 				jsMVC.controller.application.prefix = applicationConfig.prefix;
