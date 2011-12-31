@@ -481,13 +481,6 @@ jsMVC.document.setLanguageCode = function (languageCode) {
 	}
 };
 
-jsMVC.document.translate = function (languageCode) {
-	if (typeof(languageCode) === 'string') {
-		jsMVC.document.setLanguageCode(languageCode);
-		// TODO: Translate all tags!!!
-	}
-};
-
 // MODEL
 // ****************************************************************************
 // ****************************************************************************
