@@ -43,7 +43,7 @@ jsMVC.init = function (appFolder, appContainer, appController, appParams) {
 		jsMVC.error.log("The third parameter to init must be the application controller name.");
 		return;
 	}
-	// Set the application parameters.
+	// Set the application controller parameters.
 	var params = null;
 	if (appParams === undefined || appParams === null) {
 		params = [];
