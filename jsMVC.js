@@ -612,7 +612,7 @@ jsMVC.style.load = function (styleName) {
 			function () {
 				deferred.resolve();
 			},
-			jsMVC.utils.createRandomNumber(jsMVC.view.delayMin, jsMVC.view.delayMax)
+			jsMVC.utils.createRandomNumber(jsMVC.style.delayMin, jsMVC.style.delayMax)
 		);
 	} else {
 		deferred.resolve();
