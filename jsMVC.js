@@ -1045,7 +1045,6 @@ jsMVC.controller.view.delayMin = 0;
 jsMVC.controller.view.delayMax = 0;
 
 // Load the controller from the server and returns the controller object as a parameter to the done callback of the returned deferred object.
-// TODO: What about this: var controller = new controllerConstructor(jQuery,jQuery);!!!!!!!!!!!!!!!!!
 jsMVC.controller.view.load = function (controllerName) {
 	// The deferred to return.
 	var deferred = jQuery.Deferred();
