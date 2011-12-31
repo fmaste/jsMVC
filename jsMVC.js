@@ -200,6 +200,27 @@ jsMVC.config.parse = function (jsonConfig) {
 			}
 		}
 	}
+	// Image
+	if (jsonConfig.image) {
+		var imageConfig = jsonConfig.image;
+		// Prefix
+		if (imageConfig.prefix) {
+			jsMVC.image.prefix = imageConfig.prefix;
+		}
+		// Suffix
+		if (imageConfig.suffix) {
+			jsMVC.image.suffix = imageConfig.suffix;
+		}
+		// Delay min.
+		if (imageConfig.delayMin) {
+			jsMVC.image.delayMin = imageConfig.delayMin;
+		}
+		// Delay max.
+		if (imageConfig.delayMax) {
+			jsMVC.image.delayMax = imageConfig.delayMax;
+		}
+		// TODO: Preloaded images!
+	}
 	// Libraries
 	if (jsonConfig.library) {
 		var libraryConfig = jsonConfig.library;
@@ -279,27 +300,6 @@ jsMVC.config.parse = function (jsonConfig) {
 		if (viewConfig.delayMax) {
 			jsMVC.view.delayMax = viewConfig.delayMax;
 		}
-	}
-	// Image
-	if (jsonConfig.image) {
-		var imageConfig = jsonConfig.image;
-		// Prefix
-		if (imageConfig.prefix) {
-			jsMVC.image.prefix = imageConfig.prefix;
-		}
-		// Suffix
-		if (imageConfig.suffix) {
-			jsMVC.image.suffix = imageConfig.suffix;
-		}
-		// Delay min.
-		if (imageConfig.delayMin) {
-			jsMVC.image.delayMin = imageConfig.delayMin;
-		}
-		// Delay max.
-		if (imageConfig.delayMax) {
-			jsMVC.image.delayMax = imageConfig.delayMax;
-		}
-		// TODO: Preloaded images!
 	}
 	// Source
 	if (jsonConfig.source) {
