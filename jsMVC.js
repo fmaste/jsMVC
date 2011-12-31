@@ -1243,22 +1243,22 @@ jsMVC.render.linkViewAndController = function (viewContainerSelector, viewName, 
 jsMVC.render.getViewsToInclude = function (viewContainerSelector, viewFoundCallback) {
 	var viewsToInclude = [];
 	jQuery(viewContainerSelector).find('.jsMVC-view').each(function () {
-			var elemToIncludeView = jQuery(this);
-			var viewNameToInclude = elemToIncludeView.attr("data-jsMVC-view");
-			if (viewNameToInclude !== undefined) { // TODO: check isString
-				if (viewFoundCallback !== undefined && jQuery.isFunction(viewFoundCallback)) {
-					viewFoundCallback(elemToIncludeView, viewNameToInclude);
-				}
-				viewsToInclude.push({
-					"selector": elemToIncludeView,
-					"name": viewNameToInclude
-				});
-			} else {
-				// TODO: Not too usefull message.
-				var id = this.id;
-				var tagName = this.nodeName;
-				jsMVC.error.log("Tag " + tagName + (id ? " with id " + id : "") + " has no view name.");
+		var elemToIncludeView = jQuery(this);
+		var viewNameToInclude = elemToIncludeView.attr("data-jsMVC-view");
+		if (viewNameToInclude !== undefined) { // TODO: check isString
+			if (viewFoundCallback !== undefined && jQuery.isFunction(viewFoundCallback)) {
+				viewFoundCallback(elemToIncludeView, viewNameToInclude);
 			}
+			viewsToInclude.push({
+				"selector": elemToIncludeView,
+				"name": viewNameToInclude
+			});
+		} else {
+			// TODO: Not too usefull message.
+			var id = this.id;
+			var tagName = this.nodeName;
+			jsMVC.error.log("Tag " + tagName + (id ? " with id " + id : "") + " has no view name.");
+		}
 	});
 	return viewsToInclude;
 };
