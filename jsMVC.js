@@ -1208,12 +1208,18 @@ jsMVC.render.processViews = function (viewContainerSelector) {
 	// The inner views deferred processors.
 	var deferredArray = [];
 	// Render every view thas is founded on viewContainerSelector.
-	var viewsToInclude = jsMVC.render.getViewsToInclude(viewContainerSelector, function (innerViewContainerSelector, innerViewName, controllerName) {
-		// Start processing the inner view.
-		var viewDeferred = jsMVC.render(innerViewContainerSelector, innerViewName, controllerName);
-		// Add it to the deferred queue.
-		deferredArray.push(viewDeferred);
-	});
+	var viewsToInclude = jsMVC.render.getViewsToInclude(viewContainerSelector, 
+		function (innerViewContainerSelector, innerViewName, controllerName) {
+			// Start processing the inner view.
+			var viewDeferred = jsMVC.render(
+				innerViewContainerSelector, 
+				innerViewName, 
+				controllerName
+			);
+			// Add it to the deferred queue.
+			deferredArray.push(viewDeferred);
+		}
+	);
 	// Wait for all processors.
 	jQuery.when.apply(jQuery, deferredArray).done(function () {
 		// Resolve with an array of {selector, name} objects.
