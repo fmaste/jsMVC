@@ -1281,6 +1281,7 @@ jsMVC.render.linkViewAndController = function (viewContainerSelector, viewName, 
 // Rename the "src" attribute to "data-jsMVC-scr" of each image on the provided string.
 jsMVC.render.alterImages = function (viewString) {
 	// Put the view inside a div so we can alter this dom fragment without including it on the document.
+	// Without this it would be impossible to alter the DOM in the string.
 	// If this view is inserted to the dom the images will start loading.
 	var view = jQuery("<div>" + viewString + "</div>", document);
 	view.find('img').each(function () {
