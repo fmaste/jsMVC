@@ -1144,7 +1144,7 @@ jsMVC.render = function (viewContainerSelector, viewName, controllerName) {
 	// Deferred for this view subviews.
 	var subviewsDeferred = jQuery.Deferred();
 	// Load the needed view controller in parallel.
-	var controllerDeferred = jsMVC.render.getViewControllerDeferred(controllerName);
+	var controllerDeferred = jsMVC.controller.view.load(controllerName);
 	// As soon as the view is ready show it and start rendering its subviews.
 	viewDeferred.done(function (viewString) {
 		// When view is ready alter the image tags so they don't start downloading when inserted into the DOM.
@@ -1262,10 +1262,6 @@ jsMVC.render.getViewsToInclude = function (viewContainerSelector, viewFoundCallb
 		}
 	});
 	return viewsToInclude;
-};
-
-jsMVC.render.getViewControllerDeferred = function (controllerName) {
-	return jsMVC.controller.view.load(controllerName);
 };
 
 jsMVC.render.linkViewAndController = function (viewContainerSelector, viewName, controller) {
