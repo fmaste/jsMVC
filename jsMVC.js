@@ -566,6 +566,9 @@ jsMVC.view.load = function (viewName) {
 	});
 	// On download fail.
 	downloader.fail(function (jqXHR, textStatus, errorThrown) {
+		// Clear queue.
+		jsMVC.view.queue[viewName] = undefined;
+		// TODO: Better error message. Use debug mode and apply styles, put a message when dbl click on the view, etc.
 		deferred.reject(jqXHR, textStatus, errorThrown);
 	});
 	// Return the promise only.
