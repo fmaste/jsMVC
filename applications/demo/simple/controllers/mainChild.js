@@ -8,8 +8,4 @@ jsMVC.controller.view.Class({
 	this.onLoad = function () {
 	}
 
-	this.getController = function (viewName) {
-		return null;
-	}
-
 });
