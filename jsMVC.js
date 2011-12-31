@@ -1140,15 +1140,17 @@ jsMVC.render = function (viewContainerSelector, viewName, controllerName) {
 	// Put a temporal "loading" view using a spinner.
 	jQuery(viewContainerSelector).html('<img src="' + jsMVC.image.getUri("spinner.gif") + '" style="display: block; text-align: center;"/>');
 	// Start downloading the needed view.
-	var viewDeferred = jsMVC.render.getViewDeferred(viewName);
+	var viewDeferred = jsMVC.view.load(viewName);
 	// Deferred for this view subviews.
 	var subviewsDeferred = jQuery.Deferred();
 	// Load the needed view controller in parallel.
 	var controllerDeferred = jsMVC.render.getViewControllerDeferred(controllerName);
 	// As soon as the view is ready show it and start rendering its subviews.
 	viewDeferred.done(function (viewString) {
+		// When view is ready alter the image tags so they don't start downloading when inserted into the DOM.
+		var editedViewString = jsMVC.render.alterImages(viewString);
 		// The view string was edited and every img tag was replaced with a placeholder to change the download technique.
-		jsMVC.render.includeView(viewContainerSelector, viewString);
+		jsMVC.render.includeView(viewContainerSelector, editedViewString);
 		// Disable view until controller is ready.
 		jQuery(viewContainerSelector).fadeTo("slow", 0.5);
 		// After inserting into the DOM start downloading the images asynchronously in parrallel.
@@ -1260,22 +1262,6 @@ jsMVC.render.getViewsToInclude = function (viewContainerSelector, viewFoundCallb
 		}
 	});
 	return viewsToInclude;
-};
-
-jsMVC.render.getViewDeferred = function (viewName) {
-	var deferred = jQuery.Deferred();
-	jsMVC.view.load(viewName)
-	.done(function (viewString) {
-		// When view is ready alter the image tags so they don't start downloading when inserted into the DOM.
-		var editedViewString = jsMVC.render.alterImages(viewString);
-		// Resolve the returned deferred with the edited view.
-		deferred.resolve(editedViewString);
-	})
-	.fail(function (jqXHR, textStatus, errorThrown) {
-		// TODO: Put an error view!!!!
-		deferred.reject(jqXHR, textStatus, errorThrown);
-	});
-	return deferred.promise();
 };
 
 jsMVC.render.getViewControllerDeferred = function (controllerName) {
