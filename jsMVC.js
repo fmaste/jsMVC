@@ -16,7 +16,7 @@ $.noConflict();
 // The first parameter is the root folder for the application to load.
 // From this folder the config file (as named in config.name) will be loaded.
 // Finally init.application will be called with controller.application.name.
-jsMVC.init = function (appFolder) {
+jsMVC.init = function (appFolder, appContainer) {
 	// If no application folder use the root directory.
 	if (appFolder !== undefined) {
 		if (typeof appFolder === "string") {
@@ -26,6 +26,8 @@ jsMVC.init = function (appFolder) {
 			return;
 		}
 	}
+	// TODO: Validate the appContainer!
+	jsMVC.controller.application.container = appContainer;
 	// Load the config.
 	jsMVC.config.load().done(function() {
 		// Initiate the application.
@@ -45,7 +47,7 @@ jsMVC.init.application = function (applicationName, constructorParameters) {
 	// Load the application controller.
 	jsMVC.controller.application.load(applicationName).done(function (application) {
 		// Set the active applications to container. 
-		jQuery("#jsMVC").data("data-jsMVC-application", application);
+		jQuery(jsMVC.controller.application.container).data("data-jsMVC-application", application);
 		// Call the application init method.
 		jsMVC.classes.initInstance(application, constructorParameters);
 		// Set html title from the application controller's method or property.
@@ -82,7 +84,7 @@ jsMVC.init.application = function (applicationName, constructorParameters) {
 jsMVC.init.view = function (application) {
 	// Render all the views.
 	jsMVC.render(
-		jQuery("#jsMVC")
+		jQuery(jsMVC.controller.application.container)
 	).done(function (includedViews) {
 		// Add all the views to the applications controller.
 		for (var key in includedViews) {
@@ -947,6 +949,9 @@ jsMVC.Class = function (classMetadata, classConstructor) {
 // APPLICATION CONTROLLER
 // ****************************************************************************
 // ****************************************************************************
+
+// The application container.
+jsMVC.controller.application.container = "";
 
 // The application to load on init.
 jsMVC.controller.application.name = "";
