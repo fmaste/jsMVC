@@ -17,12 +17,14 @@ $.noConflict();
 // From this folder the config file (as named in config.name) will be loaded.
 // Finally init.application will be called with controller.application.name.
 jsMVC.init = function (appFolder, appContainer) {
+	// Set the application folder.
 	if (typeof appFolder === "string") {
 		jsMVC.config.prefix = appFolder;
 	} else {
 		jsMVC.error.log("The first parameter to init must be a string with the Application folder.");
 		return;
 	}
+	// Set the application controller.
 	if (typeof appContainer === "string") {
 		if (jQuery.find(appContainer).length === 1) {
 			jsMVC.controller.application.container = appContainer;	
