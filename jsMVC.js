@@ -806,11 +806,7 @@ jsMVC.library.load = function (scriptUri, sync) {
 		downloader = jQuery.ajax({
 			url: scriptUri,
 			async: sync ? false : true,
-			dataType: 'script',
-			success: function (stringScript) {
-			},
-			error: function (jqXHR, textStatus, errorThrown) {
-			}
+			dataType: 'script'
 		});
 		// Fill the queue.
 		jsMVC.library.queue[scriptUri] = downloader;
