@@ -1110,6 +1110,7 @@ jsMVC.social.facebook.init = function (appId) {
 // ****************************************************************************
 // ****************************************************************************
 
+// Parses the container looking for nodes with jsMVC-view as class attribute to render.
 // Returns a deferred that resolves with an array of the processed first level views.
 jsMVC.render = function (viewContainerSelector) {
 	// The deferred to return.
