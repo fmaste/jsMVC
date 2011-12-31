@@ -16,7 +16,7 @@ $.noConflict();
 // The first parameter is the root folder for the application to load.
 // From this folder the config file (as named in config.name) will be loaded.
 // Finally init.application will be called with controller.application.name.
-jsMVC.init = function (appFolder, appContainer, appController) {
+jsMVC.init = function (appFolder, appContainer, appController, appParams) {
 	// Set the application folder.
 	if (typeof appFolder === "string") {
 		jsMVC.config.prefix = appFolder;
@@ -43,11 +43,19 @@ jsMVC.init = function (appFolder, appContainer, appController) {
 		jsMVC.error.log("The third parameter to init must be the application controller name.");
 		return;
 	}
+	// Set the application parameters.
+	var params = null;
+	if (appParams === undefined || appParams === null) {
+		params = [];
+	} else if (jQuery.isArray(appParams)) {
+		params = appParams;
+	} else {
+		params = [appParams]
+	}
 	// Load the config.
 	jsMVC.config.load().done(function() {
 		// Initiate the application.
-		// TODO: Application constructor parameters!
-		jsMVC.init.application(jsMVC.controller.application.name, []);
+		jsMVC.init.application(jsMVC.controller.application.name, params);
 	}).fail(function (jqXHR, textStatus, errorThrown) {
 		// TODO: Do visually something on config load fail.
 		// The config load already shows an error message.
