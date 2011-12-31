@@ -24,7 +24,7 @@ jsMVC.init = function (appFolder, appContainer) {
 		jsMVC.error.log("The first parameter to init must be a string with the Application folder.");
 		return;
 	}
-	// Set the application controller.
+	// Set the application container.
 	if (typeof appContainer === "string") {
 		if (jQuery.find(appContainer).length === 1) {
 			jsMVC.controller.application.container = appContainer;	
