@@ -1223,6 +1223,34 @@ jsMVC.render.processViews = function (viewContainerSelector) {
 	return deferred.promise();
 };
 
+// Look for all the elements with a className equal to jsMVC-view and include the views inside them.
+// Using a class name because document.getElementsByClassName should be the fastest way of finding this nodes. // TODO: Verify this!
+// The view name is found on the attribute data-jsMVC-view. (HTML5 proof)
+jsMVC.render.getViewsToInclude = function (viewContainerSelector, viewFoundCallback) {
+	var viewsToInclude = [];
+	jQuery(viewContainerSelector).find('.jsMVC-view').each(function () {
+		var elemToIncludeView = jQuery(this);
+		var viewNameToInclude = elemToIncludeView.attr("data-jsMVC-view");
+		if (viewNameToInclude !== undefined) { // TODO: check isString
+			// TODO: Allow to set the controller name with "data-jsMVC-controller"!
+			var controllerNameToUse = viewNameToInclude;
+			if (viewFoundCallback !== undefined && jQuery.isFunction(viewFoundCallback)) {
+				viewFoundCallback(elemToIncludeView, viewNameToInclude, controllerNameToUse);
+			}
+			viewsToInclude.push({
+				"selector": elemToIncludeView,
+				"name": viewNameToInclude
+			});
+		} else {
+			// TODO: Not too usefull message.
+			var id = this.id;
+			var tagName = this.nodeName;
+			jsMVC.error.log("Tag " + tagName + (id ? " with id " + id : "") + " has no view name.");
+		}
+	});
+	return viewsToInclude;
+};
+
 jsMVC.render.getViewDeferred = function (viewName) {
 	var deferred = jQuery.Deferred();
 	jsMVC.view.load(viewName)
@@ -1256,34 +1284,6 @@ jsMVC.render.linkViewAndController = function (viewContainerSelector, viewName, 
 	}
 	// TODO: Link controller with parent controller.
 }
-
-// Look for all the elements with a className equal to jsMVC-view and include the views inside them.
-// Using a class name because document.getElementsByClassName should be the fastest way of finding this nodes. // TODO: Verify this!
-// The view name is found on the attribute data-jsMVC-view. (HTML5 proof)
-jsMVC.render.getViewsToInclude = function (viewContainerSelector, viewFoundCallback) {
-	var viewsToInclude = [];
-	jQuery(viewContainerSelector).find('.jsMVC-view').each(function () {
-		var elemToIncludeView = jQuery(this);
-		var viewNameToInclude = elemToIncludeView.attr("data-jsMVC-view");
-		if (viewNameToInclude !== undefined) { // TODO: check isString
-			// TODO: Allow to set the controller name with "data-jsMVC-controller"!
-			var controllerNameToUse = viewNameToInclude;
-			if (viewFoundCallback !== undefined && jQuery.isFunction(viewFoundCallback)) {
-				viewFoundCallback(elemToIncludeView, viewNameToInclude, controllerNameToUse);
-			}
-			viewsToInclude.push({
-				"selector": elemToIncludeView,
-				"name": viewNameToInclude
-			});
-		} else {
-			// TODO: Not too usefull message.
-			var id = this.id;
-			var tagName = this.nodeName;
-			jsMVC.error.log("Tag " + tagName + (id ? " with id " + id : "") + " has no view name.");
-		}
-	});
-	return viewsToInclude;
-};
 
 // Rename the "src" attribute to "data-jsMVC-scr" of each image on the provided string.
 jsMVC.render.alterImages = function (viewString) {
