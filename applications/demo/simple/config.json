@@ -22,7 +22,9 @@
 	"image": {
 		"prefix": "images/",
 		"suffix": "",
-		"preload": ["spinner.png"],
+		"preload": [
+			"spinner.gif"
+		],
 		"delayMin": 1000,
 		"delayMax": 2000
 	},

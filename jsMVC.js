@@ -219,7 +219,15 @@ jsMVC.config.parse = function (jsonConfig) {
 		if (imageConfig.delayMax) {
 			jsMVC.image.delayMax = imageConfig.delayMax;
 		}
-		// TODO: Preloaded images!
+		// Preloaded images.
+		if (imageConfig.preload && jQuery.isArray(imageConfig.preload)) {
+			var preload = imageConfig.preload;
+			for (var key in preload) {
+				dynamicWhen.addDeferred(
+					jsMVC.image.load(jsMVC.image.getUri(preload[key]))
+				);
+			}
+		}
 	}
 	// Translation
 	if (jsonConfig.translation) {
