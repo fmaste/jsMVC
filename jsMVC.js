@@ -1293,7 +1293,7 @@ jsMVC.render.alterImages = function (viewString) {
 	});
 	// Return the string content of the div.
 	return view.html();
-}
+};
 
 jsMVC.render.loadImages = function (viewContainerSelector) {
 	// Now load every image asynchronously and simultaneosly.
