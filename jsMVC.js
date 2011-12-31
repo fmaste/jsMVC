@@ -1264,20 +1264,6 @@ jsMVC.render.getViewsToInclude = function (viewContainerSelector, viewFoundCallb
 	return viewsToInclude;
 };
 
-jsMVC.render.linkViewAndController = function (viewContainerSelector, viewName, controller) {
-	// Link controller with HTML node (using jQuery data).
-	jQuery(viewContainerSelector).data("data-jsMVC-controller", controller);
-	// Add references to the view in the controller and its parent chain.
-	var parent = controller;
-	while (parent !== undefined) {
-		parent.view = jQuery(viewContainerSelector);
-		parent.viewName = viewName;
-		parent.viewContainerSelector = viewContainerSelector;
-		var parent = parent.parent;
-	}
-	// TODO: Link controller with parent controller.
-}
-
 // Rename the "src" attribute to "data-jsMVC-scr" of each image on the provided string.
 jsMVC.render.alterImages = function (viewString) {
 	// Put the view inside a div so we can alter this dom fragment without including it on the document.
@@ -1307,6 +1293,20 @@ jsMVC.render.loadImages = function (viewContainerSelector) {
 		});
 	});
 };
+
+jsMVC.render.linkViewAndController = function (viewContainerSelector, viewName, controller) {
+	// Link controller with HTML node (using jQuery data).
+	jQuery(viewContainerSelector).data("data-jsMVC-controller", controller);
+	// Add references to the view in the controller and its parent chain.
+	var parent = controller;
+	while (parent !== undefined) {
+		parent.view = jQuery(viewContainerSelector);
+		parent.viewName = viewName;
+		parent.viewContainerSelector = viewContainerSelector;
+		var parent = parent.parent;
+	}
+	// TODO: Link controller with parent controller.
+}
 
 jsMVC.render.getStylesToInclude = function (viewContainerSelector, styleFoundCallback) {
 	// TODO: Transform CSS to local CSS to this view.
