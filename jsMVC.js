@@ -508,7 +508,8 @@ jsMVC.view.prefix = "views/";
 // Can be overrided with the config file.
 jsMVC.view.suffix = ".html";
 
-// Get the URI of the view. Names are treated as java packages (main.footer.Legal is main/footer/Legal.html).
+// Get the URI of the view. 
+// Names are treated as java packages (main.footer.Legal is main/footer/Legal.html).
 jsMVC.view.getUri = function (viewName) {
 	return jsMVC.config.prefix + 
 		jsMVC.view.prefix + 
@@ -583,7 +584,8 @@ jsMVC.style.prefix = "css/";
 // Can be overrided with the config file.
 jsMVC.style.suffix = ".css";
 
-// Get the URI of the stylesheet. Names are treated as java packages (main.header.Border is main/header/Border.css).
+// Get the URI of the stylesheet. 
+// Names are treated as java packages (main.header.Border is main/header/Border.css).
 jsMVC.style.getUri = function (styleName) {
 	return jsMVC.config.prefix + 
 		jsMVC.style.prefix + 
@@ -630,6 +632,7 @@ jsMVC.image.prefix = "images/";
 jsMVC.image.suffix = "";
 
 // Get the URI of the image file.
+// The image file is not treated as a package, is a normal path.
 jsMVC.image.getUri = function (imageFile) {
 	return jsMVC.config.prefix + 
 		jsMVC.image.prefix +
@@ -705,7 +708,8 @@ jsMVC.translation.prefix = "translations/";
 // Can be overrided with the config file.
 jsMVC.translation.suffix = ".json";
 
-// Get the URI of the translationName class. Names are treated as java packages (person.Employee is person/Employee.json).
+// Get the URI of the translationName class. 
+// Names are treated as java packages (person.Employee is person/Employee.json).
 jsMVC.translation.getUri = function (translationName) {
 	return jsMVC.config.prefix + 
 		jsMVC.translation.prefix + 
@@ -907,7 +911,8 @@ jsMVC.source.prefix = "src/";
 // Can be overrided with the config file.
 jsMVC.source.suffix = ".js";
 
-// Get the URI of the source class. Names are treated as java packages (person.Employee is person/Employee.js).
+// Get the URI of the source class. 
+// Names are treated as java packages (person.Employee is person/Employee.js).
 jsMVC.source.getUri = function (className) {
 	return jsMVC.config.prefix + 
 		jsMVC.source.prefix + 
@@ -954,7 +959,8 @@ jsMVC.controller.application.prefix = "";
 // Can be overrided with the config file.
 jsMVC.controller.application.suffix = ".js";
 
-// Get the URI of the controller class. Names are treated as java packages (person.Employee is person/Employee.js).
+// Get the URI of the controller class. 
+// Names are treated as java packages (person.Employee is person/Employee.js).
 jsMVC.controller.application.getUri = function (applicationName) {
 	return jsMVC.config.prefix + 
 		jsMVC.controller.application.prefix + 
@@ -1020,7 +1026,8 @@ jsMVC.controller.view.prefix = "controllers/";
 // Can be overrided with the config file.
 jsMVC.controller.view.suffix = ".js";
 
-// Get the URI of the controller class. Names are treated as java packages (person.Employee is person/Employee.js).
+// Get the URI of the controller class. 
+// Names are treated as java packages (person.Employee is person/Employee.js).
 jsMVC.controller.view.getUri = function (controllerName) {
 	return jsMVC.config.prefix + 
 		jsMVC.controller.view.prefix + 
