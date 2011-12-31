@@ -1306,7 +1306,7 @@ jsMVC.render.loadImages = function (viewContainerSelector) {
 		.fail(function (uri, image) {
 		});
 	});
-}
+};
 
 jsMVC.render.getStylesToInclude = function (viewContainerSelector, styleFoundCallback) {
 	// TODO: Transform CSS to local CSS to this view.
