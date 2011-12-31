@@ -215,10 +215,6 @@ jsMVC.config.parse = function (jsonConfig) {
 		if (imageConfig.prefix) {
 			jsMVC.image.prefix = imageConfig.prefix;
 		}
-		// Suffix
-		if (imageConfig.suffix) {
-			jsMVC.image.suffix = imageConfig.suffix;
-		}
 		// Delay min.
 		if (imageConfig.delayMin) {
 			jsMVC.image.delayMin = imageConfig.delayMin;
@@ -630,17 +626,12 @@ jsMVC.style.load = function (styleName) {
 // Can be overrided with the config file.
 jsMVC.image.prefix = "images/";
 
-// The path suffix to get the server files.
-// Can be overrided with the config file.
-jsMVC.image.suffix = "";
-
 // Get the URI of the image file.
 // The image file is not treated as a package, is a normal path.
 jsMVC.image.getUri = function (imageFile) {
 	return jsMVC.config.prefix + 
 		jsMVC.image.prefix +
 		imageFile + 
-		jsMVC.image.suffix + 
 		jsMVC.config.suffix;
 };
 

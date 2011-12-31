@@ -21,7 +21,6 @@
 	},
 	"image": {
 		"prefix": "images/",
-		"suffix": "",
 		"preload": [
 			"spinner.gif"
 		],
