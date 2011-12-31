@@ -1250,7 +1250,8 @@ jsMVC.render.getViewsToInclude = function (viewContainerSelector, viewFoundCallb
 			}
 			viewsToInclude.push({
 				"selector": elemToIncludeView,
-				"name": viewNameToInclude
+				"viewName": viewNameToInclude,
+				"controllerName": controllerNameToUse
 			});
 		} else {
 			// TODO: Not too usefull message.
