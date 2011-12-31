@@ -1244,7 +1244,6 @@ jsMVC.render.getViewsToInclude = function (viewContainerSelector, viewFoundCallb
 			if (controllerNameToUse === undefined) { // TODO: check isString
 				controllerNameToUse = viewNameToInclude;
 			}
-			var controllerNameToUse = viewNameToInclude;
 			if (viewFoundCallback !== undefined && jQuery.isFunction(viewFoundCallback)) {
 				viewFoundCallback(elemToIncludeView, viewNameToInclude, controllerNameToUse);
 			}
