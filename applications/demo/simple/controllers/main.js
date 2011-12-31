@@ -11,10 +11,6 @@ jsMVC.controller.view.Class({
 		this.parent.init(-2);
 	}
 
-	this.getController = function (viewName) {
-		return null;
-	}
-
 	this.getCounter = function () {
 		//alert(this.className + ": getCounter(): " + this.counter);
 		return this.counter + 1;
