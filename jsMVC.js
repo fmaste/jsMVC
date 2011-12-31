@@ -221,6 +221,27 @@ jsMVC.config.parse = function (jsonConfig) {
 		}
 		// TODO: Preloaded images!
 	}
+	// Translation
+	if (jsonConfig.translation) {
+		var translationConfig = jsonConfig.translation;
+		// Prefix
+		if (translationConfig.prefix) {
+			jsMVC.translation.prefix = translationConfig.prefix;
+		}
+		// Suffix
+		if (translationConfig.suffix) {
+			jsMVC.translation.suffix = translationConfig.suffix;
+		}
+		// Globals
+		if (translationConfig.globals && jQuery.isArray(translationConfig.globals)) {
+			var globalTranslations = translationConfig.globals;
+			for (var key in globalTranslations) {
+				// TODO: Use dynamic when!!
+				// TODO: Set an onFinishCallback!!!!!!!!!!!
+				jsMVC.translation.addToMain(globalTranslations[key]);
+			}
+		}
+	}
 	// Libraries
 	if (jsonConfig.library) {
 		var libraryConfig = jsonConfig.library;
@@ -252,27 +273,6 @@ jsMVC.config.parse = function (jsonConfig) {
 						jsMVC.library.load(sources[key])
 					);
 				}
-			}
-		}
-	}
-	// Translation
-	if (jsonConfig.translation) {
-		var translationConfig = jsonConfig.translation;
-		// Prefix
-		if (translationConfig.prefix) {
-			jsMVC.translation.prefix = translationConfig.prefix;
-		}
-		// Suffix
-		if (translationConfig.suffix) {
-			jsMVC.translation.suffix = translationConfig.suffix;
-		}
-		// Globals
-		if (translationConfig.globals && jQuery.isArray(translationConfig.globals)) {
-			var globalTranslations = translationConfig.globals;
-			for (var key in globalTranslations) {
-				// TODO: Use dynamic when!!
-				// TODO: Set an onFinishCallback!!!!!!!!!!!
-				jsMVC.translation.addToMain(globalTranslations[key]);
 			}
 		}
 	}
