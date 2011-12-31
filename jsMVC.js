@@ -28,6 +28,7 @@ jsMVC.init = function (appFolder, appContainer) {
 			jsMVC.controller.application.container = appContainer;	
 		} else {
 			jsMVC.error.log("The application container selector must match one element.");
+			return;
 		}
 	} else {
 		jsMVC.error.log("The second parameter to init must be a selector to the application container.");
