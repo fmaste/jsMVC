@@ -1362,15 +1362,6 @@ jsMVC.resetCaches = function () {
 // jQuery(Iframe ID).attr("type", "");
 // jQuery(Iframe ID).attr("src", "");
 
-// Testing Classes!!
-//var employee = jsMVC.New("person.Employee", ["fmaste@gmail.com", "Fede", "Maste", 0]);
-//alert("Salary 1: " + employee.getSalary());
-//alert("Name 1: " + employee.getFirstName());
-//employee.setFirstName("Fede2");
-//employee.setSalary(99);
-//alert("Salary 2: " + employee.getSalary());
-//alert("Name 2: " + employee.getFirstName());
-
 	// ------------------------------
 	// Create ajQuery object that is context bounded to the view.
 	//var viewJQuery = function(viewSelector) {
