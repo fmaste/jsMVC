@@ -1225,14 +1225,19 @@ jsMVC.render.processViews = function (viewContainerSelector) {
 
 // Look for all the elements with a className equal to jsMVC-view and include the views inside them.
 // Using a class name because document.getElementsByClassName should be the fastest way of finding this nodes. // TODO: Verify this!
-// The view name is found on the attribute data-jsMVC-view. (HTML5 proof)
+// The view name is found on the attribute data-jsMVC-view.
+// The controller name is found on the attribute data-jsMVC-controller.
+// If there is no controller name the view name is used as controller name.
 jsMVC.render.getViewsToInclude = function (viewContainerSelector, viewFoundCallback) {
 	var viewsToInclude = [];
 	jQuery(viewContainerSelector).find('.jsMVC-view').each(function () {
 		var elemToIncludeView = jQuery(this);
 		var viewNameToInclude = elemToIncludeView.attr("data-jsMVC-view");
 		if (viewNameToInclude !== undefined) { // TODO: check isString
-			// TODO: Allow to set the controller name with "data-jsMVC-controller"!
+			var controllerNameToUse = elemToIncludeView.attr("data-jsMVC-controller");
+			if (controllerNameToUse === undefined) { // TODO: check isString
+				controllerNameToUse = viewNameToInclude;
+			}
 			var controllerNameToUse = viewNameToInclude;
 			if (viewFoundCallback !== undefined && jQuery.isFunction(viewFoundCallback)) {
 				viewFoundCallback(elemToIncludeView, viewNameToInclude, controllerNameToUse);
