@@ -91,6 +91,8 @@ jsMVC.init.application = function (applicationName, constructorParameters) {
 		} else if (application.languageCode && typeof(application.languageCode) === 'string') {
 			jsMVC.document.setLanguageCode(application.languageCode);
 		}
+		// Set the application controller view property.
+		application.view = jQuery(jsMVC.controller.application.container);
 		// Call the application onLoad method.
 		if (application.onLoad !== undefined  && jQuery.isFunction(application.onLoad)) {
 			application.onLoad();
