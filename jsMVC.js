@@ -770,8 +770,6 @@ jsMVC.translation.addToMain = function (translationName, onFinishCallback) {
 // Can be overrided with the config file.
 jsMVC.library.prefix = "lib/";
 
-// TODO: suffix
-
 // TODO: getUri
 
 // The deferrs of the views that are downloading or downloaded.
