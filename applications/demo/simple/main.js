@@ -25,11 +25,8 @@ jsMVC.controller.application.Class({
 
 	this.onLoad = function () {
 		// Libs loaded, translations loaded, styles loaded, etc.
-		// Here I can dinamically add views to the body! For example: decide to show a login view or a main view.
+		// Here I can dinamically add views to the application view! For example: decide to show a login view or a main view.
 		jsMVC.render(this.view, "main", "main");
-		// jQuery("#jsMVC").append('<div id="mainViewContainer1" class="jsMVC-view" data-jsMVC-view="main" data-jsMVC-style="main1,main2" style="display: inline; float: left;">');
-		// View content from view "main.html" with controller "main.js "will be placed here.
-		// Also styles main1.css and main2.css will be applied to the entire page.
 	}
 
 });
