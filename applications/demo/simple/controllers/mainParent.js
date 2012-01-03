@@ -11,7 +11,6 @@ jsMVC.controller.view.Class({
 	}
 
 	this.onLoad = function () {
-		jQuery("#firstName").val("CABEZON");
 		this.view.find("#tdToHide").hide();
 	}
 
