@@ -5,8 +5,6 @@ jsMVC.controller.view.Class({
 	this.counter = 0;
 
 	this.init = function (counter) {
-		//alert("Class: " + this.className + "\nParentName: " + this.parentName + "\nViewName: " + this.viewName);
-		//alert(this.className + ": Init with param " + counter);
 		this.counter = counter;
 	}
 
