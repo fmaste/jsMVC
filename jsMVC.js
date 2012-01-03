@@ -1264,7 +1264,7 @@ jsMVC.render.loadImages = function (viewContainerSelector) {
 jsMVC.render.linkViewAndController = function (viewContainerSelector, viewName, controller) {
 	// Link controller with HTML node (using jQuery data).
 	jQuery(viewContainerSelector).data("data-jsMVC-controller", controller);
-	// Add references to the view in the controller and its parent chain.
+	// Add references in the controller and its parent chain.
 	var parent = controller;
 	while (parent !== undefined) {
 		parent.view = jQuery(viewContainerSelector);
