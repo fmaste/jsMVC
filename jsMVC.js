@@ -1130,6 +1130,7 @@ jsMVC.render = function (viewContainerSelector, viewName, controllerName) {
 	// As soon as the controller is ready call the constructor.
 	controllerDeferred.done(function (controller) {
 		// Call the controller constructor.
+		// TODO: Accept the consructor parameters as another functions parameter.
 		var controllerConstructorParameters = [];
 		jsMVC.classes.initInstance(controller, controllerConstructorParameters);
 	});
