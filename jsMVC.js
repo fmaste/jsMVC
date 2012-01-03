@@ -1268,7 +1268,7 @@ jsMVC.render.linkViewAndController = function (viewContainerSelector, viewName, 
 	var parent = controller;
 	while (parent !== undefined) {
 		parent.view = jQuery(viewContainerSelector);
-		parent.viewContainerSelector = viewContainerSelector;
+		parent.viewContainer = viewContainerSelector;
 		var parent = parent.parent;
 	}
 	// TODO: Link controller with parent controller.
