@@ -1142,13 +1142,13 @@ jsMVC.render = function (viewContainerSelector, viewName, controllerName) {
 	// When controller, view and subviews are ready, resolve, link all together and call the onload method.
 	jQuery.when(viewDeferred, subviewsDeferred, controllerDeferred).done(function (viewString, includedViews, controller) {
 		// TODO: Link all the subviews with the view and controller.
+		// View is ready to be used.
+		jQuery(viewContainerSelector).fadeTo("slow", 1);
 		// Call the controller onload method.
 		if (controller.onLoad !== undefined && jQuery.isFunction(controller.onLoad)) {
 			// Only translations are images may be not loaded. All it parents and childs are already loaded.
 			controller.onLoad();
 		}
-		// View is ready to be used.
-		jQuery(viewContainerSelector).fadeTo("slow", 1);
 		// Resolve the returned deferred when all is done.
 		deferred.resolve();
 	});
