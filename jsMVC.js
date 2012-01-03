@@ -1118,7 +1118,7 @@ jsMVC.render = function (viewContainerSelector, viewName, controllerName) {
 		// The view string was edited and every img tag was replaced with a placeholder to change the download technique.
 		jQuery(viewContainerSelector).html(editedViewString);
 		// Disable view until controller is ready.
-		jQuery(viewContainerSelector).fadeTo("slow", 0.5);
+		jQuery(viewContainerSelector).fadeTo("fast", 0.5);
 		// After inserting into the DOM start downloading the images asynchronously in parrallel.
 		jsMVC.render.loadImages(viewContainerSelector);
 		// Now start showing its subviews.
