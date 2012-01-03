@@ -1275,7 +1275,6 @@ jsMVC.render.linkViewAndController = function (viewContainerSelector, viewName, 
 		parent.view = jQuery(viewContainerSelector).find("*").not(".jsMVC-view");
 		var parent = parent.parent;
 	}
-	// TODO: Link controller with parent controller.
 }
 
 jsMVC.render.getStylesToInclude = function (viewContainerSelector, styleFoundCallback) {
