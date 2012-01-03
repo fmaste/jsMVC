@@ -1101,6 +1101,8 @@ jsMVC.social.facebook.init = function (appId) {
 // ****************************************************************************
 
 jsMVC.render = function (viewContainerSelector, viewName, controllerName) {
+	// Set the class to the view container that marks it as a jsMVC view.
+	jQuery(viewContainerSelector).addClass("jsMVC-view");
 	// The deferred to return.
 	var deferred = jQuery.Deferred();
 	// Put a temporal "loading" view using a spinner.
