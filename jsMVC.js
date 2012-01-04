@@ -1,4 +1,5 @@
 // Define the framework namespace.
+// TODO: Hide all the private functions inside a closure.
 var jsMVC = {};
 
 // jQuery
