@@ -441,7 +441,7 @@ jsMVC.document.createRandomId = function () {
 	var length = 16;
 	var randomId = "random-id-" + jsMVC.utils.createRandomString(length);
 	while (jQuery('#' + randomId).length !== 0) {
-		randomId = jsMVC.utils.createRandomString(length);
+		randomId = "random-id-" + jsMVC.utils.createRandomString(length);
 	}
 	return randomId;
 };
