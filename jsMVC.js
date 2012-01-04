@@ -439,7 +439,7 @@ jsMVC.utils.DynamicWhen = function () {
 
 jsMVC.document.createRandomId = function () {
 	var length = 16;
-	var randomId = jsMVC.utils.createRandomString(length);
+	var randomId = "random-id-" + jsMVC.utils.createRandomString(length);
 	while (jQuery('#' + randomId).length !== 0) {
 		randomId = jsMVC.utils.createRandomString(length);
 	}
