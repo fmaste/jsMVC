@@ -446,6 +446,15 @@ jsMVC.document.createRandomId = function () {
 	return randomId;
 };
 
+jsMVC.document.createRandomClass = function () {
+	var length = 16;
+	var randomClass = "random-class-" + jsMVC.utils.createRandomString(length);
+	while (jQuery('.' + randomClass).length !== 0) {
+		randomClass = "random-class-" + jsMVC.utils.createRandomString(length);
+	}
+	return randomClass;
+};
+
 jsMVC.document.clearTitle = function () {
 	// jQuery('title').html() hungs the browser on IE6
 	document.title = "";
