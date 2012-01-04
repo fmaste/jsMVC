@@ -29,7 +29,7 @@ jsMVC.init = function (appFolder, appContainer, appController, appParams) {
 		if (jQuery.find(appContainer).length === 1) {
 			jsMVC.controller.application.container = appContainer;	
 		} else {
-			jsMVC.error.log("The application container selector must match one element.");
+			jsMVC.error.log("The application container selector must match only one element.");
 			return;
 		}
 	} else {
