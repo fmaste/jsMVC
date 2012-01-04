@@ -45,7 +45,7 @@ jsMVC.init = function (appFolder, appContainer, appController, appParams) {
 	}
 	// Set the application controller parameters.
 	var params = null;
-	if (appParams === undefined || appParams === null) {
+	if (appParams === undefined) {
 		params = [];
 	} else if (jQuery.isArray(appParams)) {
 		params = appParams;
