@@ -402,7 +402,7 @@ jsMVC.utils.createRandomNumber = function (min, max) {
 };
 
 jsMVC.utils.createRandomString = function (length) {
-	var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+	var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 	var randomstring = '';
 	for (var i = 0; i < length; i++) {
 		var rnum = Math.floor(Math.random() * chars.length);
