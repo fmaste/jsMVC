@@ -1186,6 +1186,29 @@ jsMVC.render = function (viewContainerSelector, viewName, styles, controllerName
 };
 
 jsMVC.render.styles = function (styles) {
+	// The deferred to return.
+	var deferred = jQuery.Deferred();
+	// The styles deferred processors.
+	var deferredArray = [];
+	// It may be an array of styles to apply.
+	if (jQuery.isArray(styles)) {
+		for (var key in styles) {
+			deferredArray.push(jsMVC.render.styles(styles[key]));
+		}
+	// Or it may be the string with the name of the style to apply.
+	} else if (typeof styles === "string") {
+		deferredArray.push(jsMVC.style.load(styles));
+	// Else, error!
+	} else if (styles !== null && styles !== undefined) {
+		jsMVC.error.log("Not a valid style name.");
+	}
+	// Wait for all processors.
+	jQuery.when.apply(jQuery, deferredArray).done(function () {
+		// Resolve with no params.
+                deferred.resolve();
+        });
+	// Return the promise only.
+	return deferred.promise();
 }
 
 // Parses the container looking for nodes with jsMVC-view as class attribute to render.
