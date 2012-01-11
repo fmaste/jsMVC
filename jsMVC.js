@@ -1220,12 +1220,12 @@ jsMVC.render.processViews = function (viewContainerSelector) {
 	var deferredArray = [];
 	// Render every view thas is founded on viewContainerSelector.
 	var viewsToInclude = jsMVC.render.getViewsToInclude(viewContainerSelector, 
-		function (innerViewContainerSelector, innerViewName, controllerName) {
+		function (innerViewContainerSelector, innerViewName, styles, controllerName) {
 			// Start processing the inner view.
 			var viewDeferred = jsMVC.render(
 				innerViewContainerSelector, 
 				innerViewName, 
-				null,
+				styles,
 				controllerName
 			);
 			// Add it to the deferred queue.
@@ -1252,16 +1252,19 @@ jsMVC.render.getViewsToInclude = function (viewContainerSelector, viewFoundCallb
 		var elemToIncludeView = jQuery(this);
 		var viewNameToInclude = elemToIncludeView.attr("data-jsMVC-view");
 		if (viewNameToInclude !== undefined) { // TODO: check isString
+			var styles = elemToIncludeView.attr("data-jsMVC-style");
 			var controllerNameToUse = elemToIncludeView.attr("data-jsMVC-controller");
 			if (controllerNameToUse === undefined) { // TODO: check isString
+				// If there is no controller use the view name.
 				controllerNameToUse = viewNameToInclude;
 			}
 			if (viewFoundCallback !== undefined && jQuery.isFunction(viewFoundCallback)) {
-				viewFoundCallback(elemToIncludeView, viewNameToInclude, controllerNameToUse);
+				viewFoundCallback(elemToIncludeView, viewNameToInclude, styles, controllerNameToUse);
 			}
 			viewsToInclude.push({
 				"selector": elemToIncludeView,
 				"viewName": viewNameToInclude,
+				"styles": styles,
 				"controllerName": controllerNameToUse
 			});
 		} else {
