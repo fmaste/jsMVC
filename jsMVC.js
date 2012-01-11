@@ -1281,8 +1281,9 @@ jsMVC.render.linkViewAndController = function (viewContainerSelector, viewName, 
 	while (parent !== undefined) {
 		// Allow the controller to have the view container.
 		parent.viewContainer = viewContainerSelector;
-		// Set the view property as everything except its subviws.
-		parent.view = jQuery(viewContainerSelector).find("*").not(".jsMVC-view");
+		// TODO: Set the view property as everything except its subviws.
+		// parent.view = jQuery(viewContainerSelector).find("*").not(".jsMVC-view");
+		parent.view = jQuery(viewContainerSelector);
 		var parent = parent.parent;
 	}
 }
