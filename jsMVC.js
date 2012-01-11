@@ -1111,7 +1111,7 @@ jsMVC.social.facebook.init = function (appId) {
 // ****************************************************************************
 // ****************************************************************************
 
-jsMVC.render = function (viewContainerSelector, viewName, controllerName) {
+jsMVC.render = function (viewContainerSelector, viewName, controllerName, controllerParams) {
 	// Set the class to the view container that marks it as a jsMVC view.
 	jQuery(viewContainerSelector).addClass("jsMVC-view");
 	// The deferred to return.
@@ -1143,9 +1143,7 @@ jsMVC.render = function (viewContainerSelector, viewName, controllerName) {
 	// As soon as the controller is ready call the constructor.
 	controllerDeferred.done(function (controller) {
 		// Call the controller constructor.
-		// TODO: Accept the consructor parameters as another functions parameter.
-		var controllerConstructorParameters = [];
-		jsMVC.classes.initInstance(controller, controllerConstructorParameters);
+		jsMVC.classes.initInstance(controller, controllerParams);
 	});
 	// Do something when view an controller are ready.
 	jQuery.when(viewDeferred, controllerDeferred).done(function (viewString, controller) {
