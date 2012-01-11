@@ -1111,13 +1111,15 @@ jsMVC.social.facebook.init = function (appId) {
 // ****************************************************************************
 // ****************************************************************************
 
-jsMVC.render = function (viewContainerSelector, viewName, controllerName, controllerParams) {
+jsMVC.render = function (viewContainerSelector, viewName, styles, controllerName, controllerParams) {
 	// Set the class to the view container that marks it as a jsMVC view.
 	jQuery(viewContainerSelector).addClass("jsMVC-view");
 	// The deferred to return.
 	var deferred = jQuery.Deferred();
 	// Put a temporal "loading" view using a spinner.
 	jQuery(viewContainerSelector).html('<img src="' + jsMVC.image.getUri("spinner.gif") + '" style="display: block; text-align: center;"/>');
+	// Apply the given styles.
+	var stylesDeferred = jsMVC.render.styles(styles);
 	// Start downloading the needed view.
 	var viewDeferred = jsMVC.view.load(viewName);
 	// Deferred for this view subviews.
@@ -1150,16 +1152,19 @@ jsMVC.render = function (viewContainerSelector, viewName, controllerName, contro
 		// Link view and its controller.
 		jsMVC.render.linkViewAndController(viewContainerSelector, viewName, controller);
 	});
-	// When controller, view and subviews are ready, resolve, link all together and call the onload method.
+	// When controller, view and subviews are ready call the onload method.
 	jQuery.when(viewDeferred, subviewsDeferred, controllerDeferred).done(function (viewString, includedViews, controller) {
 		// TODO: Link all the subviews with the view and controller.
-		// View is ready to be used.
-		jQuery(viewContainerSelector).fadeTo("slow", 1);
 		// Call the controller onload method.
 		if (controller.onLoad !== undefined && jQuery.isFunction(controller.onLoad)) {
 			// Only translations and images may be not loaded. All it parents and childs are already loaded.
 			controller.onLoad();
 		}
+	});
+	// Everything is ready except the translations.
+	jQuery.when(stylesDeferred, viewDeferred, subviewsDeferred, controllerDeferred).done(function () {
+		// View is ready to be used.
+		jQuery(viewContainerSelector).fadeTo("slow", 1);
 		// Resolve the returned deferred when all is done.
 		deferred.resolve();
 	});
@@ -1180,6 +1185,9 @@ jsMVC.render = function (viewContainerSelector, viewName, controllerName, contro
 	return deferred.promise();
 };
 
+jsMVC.render.styles = function (styles) {
+}
+
 // Parses the container looking for nodes with jsMVC-view as class attribute to render.
 // Returns a deferred that resolves with an array of the processed first level views.
 jsMVC.render.processViews = function (viewContainerSelector) {
@@ -1194,6 +1202,7 @@ jsMVC.render.processViews = function (viewContainerSelector) {
 			var viewDeferred = jsMVC.render(
 				innerViewContainerSelector, 
 				innerViewName, 
+				null,
 				controllerName
 			);
 			// Add it to the deferred queue.
