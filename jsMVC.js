@@ -97,6 +97,8 @@ jsMVC.init.application = function (applicationName, constructorParameters) {
 		if (application.onLoad !== undefined  && jQuery.isFunction(application.onLoad)) {
 			application.onLoad();
 		}
+		// Render all the views.
+		//TODO: jsMVC.render.processViews(jsMVC.controller.application.container);
 	}).fail(function (jqXHR, textStatus, errorThrown) {
 		// TODO: Do visually something on application load fail.
 	});
