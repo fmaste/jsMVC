@@ -1160,7 +1160,7 @@ jsMVC.render = function (viewContainerSelector, viewName, styles, controllerName
 		// Call the controller onload method.
 		if (controller.onLoad !== undefined && jQuery.isFunction(controller.onLoad)) {
 			// Only translations and images may be not loaded. All it parents and childs are already loaded.
-			controller.onLoad();
+			controller.onLoad.apply(controller, []);
 		}
 	});
 	// Everything is ready except the translations.
