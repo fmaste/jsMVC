@@ -1157,7 +1157,7 @@ jsMVC.render = function (viewContainerSelector, viewName, controllerName, contro
 		jQuery(viewContainerSelector).fadeTo("slow", 1);
 		// Call the controller onload method.
 		if (controller.onLoad !== undefined && jQuery.isFunction(controller.onLoad)) {
-			// Only translations are images may be not loaded. All it parents and childs are already loaded.
+			// Only translations and images may be not loaded. All it parents and childs are already loaded.
 			controller.onLoad();
 		}
 		// Resolve the returned deferred when all is done.
