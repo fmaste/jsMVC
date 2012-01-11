@@ -400,6 +400,14 @@ jsMVC.config.parse = function (jsonConfig) {
 // ****************************************************************************
 // ****************************************************************************
 
+jsMVC.utils.sleep = function (ms) {
+	var date = new Date();
+	var currrentDate = null;
+	do { 
+		currentDate = new Date(); 
+	} while ( currentDate - date < ms );
+};
+
 jsMVC.utils.createRandomNumber = function (min, max) {
 	return Math.floor(Math.random() * (max - min)) + min;
 };
