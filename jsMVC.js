@@ -1147,13 +1147,12 @@ jsMVC.render = function (viewContainerSelector, viewName, controllerName, contro
 	});
 	// Do something when view an controller are ready.
 	jQuery.when(viewDeferred, controllerDeferred).done(function (viewString, controller) {
-		// Nothing to do here!
+		// Link view and its controller.
+		jsMVC.render.linkViewAndController(viewContainerSelector, viewName, controller);
 	});
 	// When controller, view and subviews are ready, resolve, link all together and call the onload method.
 	jQuery.when(viewDeferred, subviewsDeferred, controllerDeferred).done(function (viewString, includedViews, controller) {
 		// TODO: Link all the subviews with the view and controller.
-		// Link view and its controller.
-		jsMVC.render.linkViewAndController(viewContainerSelector, viewName, controller);
 		// View is ready to be used.
 		jQuery(viewContainerSelector).fadeTo("slow", 1);
 		// Call the controller onload method.
