@@ -1209,6 +1209,7 @@ jsMVC.render = function (viewContainerSelector, viewName, styles, controllerName
 	return deferred.promise();
 };
 
+// Load the style(s).
 jsMVC.render.styles = function (styles) {
 	// The deferred to return.
 	var deferred = jQuery.Deferred();
