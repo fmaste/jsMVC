@@ -44,19 +44,10 @@ jsMVC.init = function (appFolder, appContainer, appController, appParams) {
 		jsMVC.error.log("The third parameter to init must be the application controller name.");
 		return;
 	}
-	// Set the application controller parameters.
-	var params = null;
-	if (appParams === undefined) {
-		params = [];
-	} else if (jQuery.isArray(appParams)) {
-		params = appParams;
-	} else {
-		params = [appParams]
-	}
 	// Load the config.
 	jsMVC.config.load().done(function() {
 		// Initiate the application.
-		jsMVC.init.application(jsMVC.controller.application.name, params);
+		jsMVC.init.application(jsMVC.controller.application.name, appParams);
 	}).fail(function (jqXHR, textStatus, errorThrown) {
 		// TODO: Do visually something on config load fail.
 		// The config load already shows an error message.
