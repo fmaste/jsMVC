@@ -1091,6 +1091,20 @@ jsMVC.controller.view.Class = function (classMetadata, classConstructor) {
 	};
 };
 
+// Create a dummy controller.
+jsMVC.controller.view.Class({
+	className: "_dummy",
+	parentName: ""
+},function() {
+
+	this.init = function () {
+	}
+
+	this.onLoad = function () {
+	}
+
+});
+
 // SOCIAL
 // ****************************************************************************
 // ****************************************************************************
