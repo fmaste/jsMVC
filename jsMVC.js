@@ -1154,7 +1154,7 @@ jsMVC.render = function (viewContainerSelector, viewName, styles, controllerName
 	// Deferred for this view subviews.
 	var subviewsDeferred = jQuery.Deferred();
 	// Load the needed view controller in parallel.
-	var controllerDeferred = jsMVC.controller.view.load(controllerName);
+	var controllerDeferred = jsMVC.render.controller(controllerName);
 	// As soon as the view is ready show it and start rendering its subviews.
 	viewDeferred.done(function (viewString) {
 		// When view is ready alter the image tags so they don't start downloading when inserted into the DOM.
@@ -1211,6 +1211,21 @@ jsMVC.render = function (viewContainerSelector, viewName, styles, controllerName
 		);
 	});
 	// Return the promise only.
+	return deferred.promise();
+};
+
+// Load the controller.
+jsMVC.render.controller = function (controllerName) {
+	var deferred;
+	if (controllerName === undefined || controllerName === null || controllerName === "") {
+		deferred = jsMVC.controller.view.load("_dummy");
+	} else if (typeof controllerName === "string" && jsMVC.utils.isLetter(controllerName)) {
+		deferred = jsMVC.controller.view.load(controllerName)
+	} else {
+		deferred = jQuery.Deferred();
+		deferred.reject();
+		jsMVC.error.log("Not a valid controller name.");
+	}
 	return deferred.promise();
 };
 
@@ -1284,10 +1299,6 @@ jsMVC.render.getViewsToInclude = function (viewContainerSelector, viewFoundCallb
 		if (viewNameToInclude !== undefined) { // TODO: check isString
 			var styles = elemToIncludeView.attr("data-jsMVC-style");
 			var controllerNameToUse = elemToIncludeView.attr("data-jsMVC-controller");
-			if (controllerNameToUse === undefined) { // TODO: check isString
-				// If there is no controller use the view name.
-				controllerNameToUse = viewNameToInclude;
-			}
 			if (viewFoundCallback !== undefined && jQuery.isFunction(viewFoundCallback)) {
 				viewFoundCallback(elemToIncludeView, viewNameToInclude, styles, controllerNameToUse);
 			}
