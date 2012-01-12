@@ -1241,10 +1241,14 @@ jsMVC.render.styles = function (styles) {
 			deferredArray.push(jsMVC.render.styles(styles[key]));
 		}
 	// Or it may be the string with the name of the style to apply.
-	} else if (typeof styles === "string") {
+	} else if (typeof styles === "string" && styles !== "") {
 		deferredArray.push(jsMVC.style.load(styles));
-	// Else, error!
-	} else if (styles !== null && styles !== undefined) {
+	// Empty style.
+	} else if (styles === "" || styles === null || styles === undefined) {
+		deferredArray.push(jQuery.Deferred().resolve());
+	// else, error!
+	} else {
+		deferredArray.push(jQuery.Deferred().reject());
 		jsMVC.error.log("Not a valid style name.");
 	}
 	// Wait for all processors.
