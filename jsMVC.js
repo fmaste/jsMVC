@@ -1302,6 +1302,9 @@ jsMVC.render.getViewsToInclude = function (viewContainerSelector, viewFoundCallb
 		var viewNameToInclude = elemToIncludeView.attr("data-jsMVC-view");
 		if (viewNameToInclude !== undefined) { // TODO: check isString
 			var styles = elemToIncludeView.attr("data-jsMVC-style");
+			if (typeof styles === "string") {
+				styles == styles.split(",");
+			}
 			var controllerNameToUse = elemToIncludeView.attr("data-jsMVC-controller");
 			if (viewFoundCallback !== undefined && jQuery.isFunction(viewFoundCallback)) {
 				viewFoundCallback(elemToIncludeView, viewNameToInclude, styles, controllerNameToUse);
