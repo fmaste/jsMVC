@@ -422,6 +422,11 @@ jsMVC.utils.createRandomString = function (length) {
 	return randomstring;
 };
 
+jsMVC.utils.isLetter = function (character) {
+	var upChar = character.charAt(0).toUpperCase().charCodeAt(0);
+	return (upChar >= "A".charCodeAt(0) && upChar <= "Z".charCodeAt(0));
+};
+
 // Allows to add deferreds to a deferred and then get a deferred that waits for all of them.
 // TODO: Use an array and pass the array or deferred to jQuery.when to make it simpler.
 jsMVC.utils.DynamicWhen = function () {
