@@ -632,7 +632,7 @@ jsMVC.style.delayMax = 0;
 // TODO: Load the stylesheet asynchronically. As text, with an object or new Image().
 jsMVC.style.load = function (styleName) {
 	var deferred = jQuery.Deferred();
-	jQuery('head').append('<link rel="stylesheet" href="' + jsMVC.style.getUri(styleName) + '" type="textcss"></link>');
+	jQuery('head').append('<link rel="stylesheet" href="' + jsMVC.style.getUri(styleName) + '" type="text/css"></link>');
 	// If in debug mode add a delay to the request.
 	if (jsMVC.config.debug) {
 		setTimeout(
