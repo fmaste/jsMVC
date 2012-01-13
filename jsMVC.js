@@ -421,6 +421,17 @@ jsMVC.utils.isLetter = function (character) {
 	return (upChar >= "A".charCodeAt(0) && upChar <= "Z".charCodeAt(0));
 };
 
+jsMVC.utils.getUrlParameter = function (paramName) {
+	var queryString = location.search;
+	var regExp = RegExp("[?|&]"+paramName+'=(.+?)(&|$)');
+	var match = queryString.match(regExp);
+	if (jQuery.isArray(match)) {
+		return match[1];
+	} else {
+		return null;
+	}
+};
+	
 // Allows to add deferreds to a deferred and then get a deferred that waits for all of them.
 // TODO: Use an array and pass the array or deferred to jQuery.when to make it simpler.
 jsMVC.utils.DynamicWhen = function () {
