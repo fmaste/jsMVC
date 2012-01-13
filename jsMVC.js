@@ -85,8 +85,6 @@ jsMVC.init.application = function (applicationName, constructorParameters) {
 		// Set the application controller view property.
 		application.view = jQuery(jsMVC.controller.application.container);
 		// Render all the views.
-		jsMVC.render.processViews(jsMVC.controller.application.container);
-		// Render all the views.
 		jsMVC.render.processViews(jsMVC.controller.application.container).done(function () {
 			// Call the application onLoad method.
 			if (application.onLoad !== undefined  && jQuery.isFunction(application.onLoad)) {
