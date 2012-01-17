@@ -218,18 +218,6 @@ jsMVC.config.parse = function (jsonConfig) {
 		jsMVC.config.debug = jsonConfig.debug;
 	}
 	/*** Them parse first the things that may need to start downloading something. ***/
-	// Style
-	if (jsonConfig.style) {
-		var styleConfig = jsonConfig.style;
-		// Prefix
-		if (styleConfig.prefix) {
-			jsMVC.style.prefix = styleConfig.prefix;
-		}
-		// Suffix
-		if (styleConfig.suffix) {
-			jsMVC.style.suffix = styleConfig.suffix;
-		}
-	}
 	// Image
 	if (jsonConfig.image) {
 		var imageConfig = jsonConfig.image;
@@ -333,6 +321,18 @@ jsMVC.config.parse = function (jsonConfig) {
 		// Delay max.
 		if (viewConfig.delayMax) {
 			jsMVC.view.delayMax = viewConfig.delayMax;
+		}
+	}
+	// Style
+	if (jsonConfig.style) {
+		var styleConfig = jsonConfig.style;
+		// Prefix
+		if (styleConfig.prefix) {
+			jsMVC.style.prefix = styleConfig.prefix;
+		}
+		// Suffix
+		if (styleConfig.suffix) {
+			jsMVC.style.suffix = styleConfig.suffix;
 		}
 	}
 	// Source
