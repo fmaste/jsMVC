@@ -114,6 +114,7 @@ jsMVC.classes = {};			// Loading and creating classes with its parents, etc.
 jsMVC.source = {};			// Load and create user created classes.
 jsMVC.controller = {};			// Controllers:
 jsMVC.controller.application = {};	// Load and create application controllers (Class).
+jsMVC.controller.page = {};		// Load and create page controllers (Class).
 jsMVC.controller.view = {};		// Load and create view controllers (Class).
 jsMVC.social = {};			// Social plugins:
 jsMVC.social.facebook = {};		// Facebook functions and helpers.
@@ -1028,6 +1029,79 @@ jsMVC.controller.application.load = function (applicationName) {
 // Function use on the source files to define a new class.
 jsMVC.controller.application.Class = function (classMetadata, classConstructor) {
 	jsMVC.controller.application.cache[classMetadata.className] = {
+		"classMetadata": classMetadata,
+		"classConstructor": classConstructor
+	};
+};
+
+// PAGE CONTROLLER
+// ****************************************************************************
+// ****************************************************************************
+
+// The page container.
+jsMVC.controller.page.container = "";
+
+// The page to load on init.
+jsMVC.controller.page.name = "";
+
+// The path prefix to get the server files.
+// Can be overrided with the config file.
+jsMVC.controller.page.prefix = "";
+
+// The path suffix to get the server files.
+// Can be overrided with the config file.
+jsMVC.controller.page.suffix = ".js";
+
+// Get the URI of the controller class. 
+// Names are treated as java packages (person.Employee is person/Employee.js).
+jsMVC.controller.page.getUri = function (controllerName) {
+	return jsMVC.config.prefix +
+		jsMVC.controller.page.prefix +
+		"/" +
+		controllerName.replace(".", "/") +
+		jsMVC.controller.page.suffix +
+		jsMVC.config.suffix;
+};
+
+// Controllers indexed by controller name.
+jsMVC.controller.page.cache = {};
+
+// An optional extra delay to use when debugging.
+// Can be overrided with the config file.
+jsMVC.controller.page.delayMin = 0;
+jsMVC.controller.page.delayMax = 0;
+
+// Load the controller from the server and returns the controller object as a parameter to the done callback of the returned deferred object.
+jsMVC.controller.page.load = function (pageName) {
+	// The deferred to return.
+	var deferred = jQuery.Deferred();
+	// Start downloading the controller.
+	var controllerDeferred = jsMVC.classes.createNewInstance(pageName, jsMVC.controller.page.cache, jsMVC.controller.page.getUri);
+	// On controller done.
+	controllerDeferred.done(function (controller) {
+	// If in debug mode add a delay to the request.
+	if (jsMVC.config.debug) {
+		setTimeout(
+			function () {
+				deferred.resolve(controller);
+			},
+			jsMVC.utils.createRandomNumber(jsMVC.controller.application.delayMin, jsMVC.controller.application.delayMax)
+		);
+	} else {
+		deferred.resolve(controller);
+	}
+	});
+	// On controller fail.
+	controllerDeferred.fail(function (jqXHR, textStatus, errorThrown) {
+		deferred.reject(jqXHR, textStatus, errorThrown);
+	});
+	// Return the promise only.
+	return deferred.promise();
+};
+
+// Function use on the source files to define a new class.
+jsMVC.controller.page.Class = function (classMetadata, classConstructor) {
+	jsMVC.controller.page.cache[classMetadata.className] = {
 		"classMetadata": classMetadata,
 		"classConstructor": classConstructor
 	};
