@@ -37,17 +37,15 @@ jsMVC.init = function (appFolder, appContainer, appController, appParams) {
 		jsMVC.error.log("The second parameter to init must be a selector to the application container.");
 		return;
 	}
-	// Set the application controller.
-	if (typeof appController === "string") {
-		jsMVC.controller.application.name = appController;
-	} else {
+	// Check the application controller name.
+	if (typeof appController !== "string") {
 		jsMVC.error.log("The third parameter to init must be the application controller name.");
 		return;
 	}
 	// Load the config.
 	jsMVC.config.load().done(function() {
 		// Initiate the application.
-		jsMVC.init.application(jsMVC.controller.application.name, appParams);
+		jsMVC.init.application(appController, appParams);
 	}).fail(function (jqXHR, textStatus, errorThrown) {
 		// TODO: Do visually something on config load fail.
 		// The config load already shows an error message.
@@ -1013,9 +1011,6 @@ jsMVC.Class = function (classMetadata, classConstructor) {
 
 // The application container.
 jsMVC.controller.application.container = "";
-
-// The application to load on init.
-jsMVC.controller.application.name = "";
 
 // The path prefix to get the server files.
 // Can be overrided with the config file.
