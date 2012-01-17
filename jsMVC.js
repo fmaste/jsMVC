@@ -64,6 +64,8 @@ jsMVC.init.application = function (applicationName, constructorParameters) {
 		jQuery(jsMVC.controller.application.container).data("data-jsMVC-application", application);
 		// Call the application init method.
 		jsMVC.classes.initInstance(application, constructorParameters);
+		// Apply the application styles.
+		jsMVC.render.styles(application.styles); // TODO: Wait for this deferred ???
 		// Get the page controller name.
 		var pageName = application.getPageName();
 		// Get the page controller constructor parameters.
@@ -226,15 +228,6 @@ jsMVC.config.parse = function (jsonConfig) {
 		// Suffix
 		if (styleConfig.suffix) {
 			jsMVC.style.suffix = styleConfig.suffix;
-		}
-		// Globals
-		if (styleConfig.globals && jQuery.isArray(styleConfig.globals)) {
-			for (var key in styleConfig.globals) {
-				// TODO: Apply this global styles only to jsMVC.controller.application.container
-				dynamicWhen.addDeferred(
-					jsMVC.style.load(styleConfig.globals[key])
-				);
-			}
 		}
 	}
 	// Image
