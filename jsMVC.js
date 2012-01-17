@@ -344,6 +344,26 @@ jsMVC.config.parse = function (jsonConfig) {
 				jsMVC.controller.application.delayMax = applicationConfig.delayMax;
 			}
 		}
+		// Page
+		if (controllerConfig.page) {
+			var pageConfig = controllerConfig.page;
+			// Prefix
+			if (pageConfig.prefix) {
+				jsMVC.controller.page.prefix = pageConfig.prefix;
+			}
+			// Suffix
+			if (pageConfig.suffix) {
+				jsMVC.controller.page.suffix = pageConfig.suffix;
+			}
+			// Delay min.
+			if (pageConfig.delayMin) {
+				jsMVC.controller.page.delayMin = pageConfig.delayMin;
+			}
+			// Delay max.
+			if (pageConfig.delayMax) {
+				jsMVC.controller.page.delayMax = pageConfig.delayMax;
+			}
+		}
 		// View
 		if (controllerConfig.view) {
 			var viewConfig = controllerConfig.view;

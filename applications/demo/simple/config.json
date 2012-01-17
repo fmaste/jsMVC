@@ -58,6 +58,12 @@
 			"delayMin": 1000,
 			"delayMax": 1000
 		},
+		"page": {
+			"prefix": "pages",
+			"suffix": ".js",
+			"delayMin": 1000,
+			"delayMax": 1000
+		},
 		"view": {
 			"prefix": "controllers/",
 			"suffix": ".js",
