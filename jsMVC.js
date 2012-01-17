@@ -55,7 +55,6 @@ jsMVC.init = function (appFolder, appContainer, appController, appParams) {
 };
 
 // Loads the application controller and calls its constructor method.
-// As provided by the application controller, set page title, favicon and language code.
 // When finished all this the application onLoad method is called. 
 jsMVC.init.application = function (applicationName, constructorParameters) {
 	// Load the application controller.
@@ -64,36 +63,58 @@ jsMVC.init.application = function (applicationName, constructorParameters) {
 		jQuery(jsMVC.controller.application.container).data("data-jsMVC-application", application);
 		// Call the application init method.
 		jsMVC.classes.initInstance(application, constructorParameters);
-		// Set html title from the application controller's method or property.
-		if (application.getTitle !== undefined && jQuery.isFunction(application.getTitle)) {
-			jsMVC.document.setTitle(application.getTitle());
-		} else if (application.title && typeof(application.title) === 'string') {
-			jsMVC.document.setTitle(application.title);
-		}
-		// Set favicon from the application controller's method or property.
-		if (application.getFavIcon !== undefined && jQuery.isFunction(application.getFavIcon)) {
-			jsMVC.document.setFavIcon(application.getFavIcon());
-		} else if (application.favIcon && typeof(application.favIcon) === 'string') {
-			jsMVC.document.setFavIcon(application.favIcon);
-		}
-		// Set the document language code from the application controller's method or property.
-		if (application.getLanguageCode !== undefined && jQuery.isFunction(application.getLanguageCode)) {
-			jsMVC.document.setLanguageCode(application.getLanguageCode());
-		} else if (application.languageCode && typeof(application.languageCode) === 'string') {
-			jsMVC.document.setLanguageCode(application.languageCode);
-		}
-		// Set the application controller view property.
-		application.view = jQuery(jsMVC.controller.application.container);
-		// Render all the views.
-		jsMVC.render.processViews(jsMVC.controller.application.container).done(function () {
-			// Call the application onLoad method.
-			if (application.onLoad !== undefined  && jQuery.isFunction(application.onLoad)) {
-				application.onLoad();
-			}
-		});
+		// Set the application controller page property.
+		application.page = jQuery(jsMVC.controller.application.container);
 	}).fail(function (jqXHR, textStatus, errorThrown) {
 		// TODO: Do visually something on application load fail.
 	});
+};
+
+// Loads the page controller and calls its constructor method.
+// As provided by the application controller, set page title, favicon and language code.
+// When finished all this the page onLoad method is called.
+jsMVC.init.page = function (pageName, constructorParameters) {
+	// The deferred to return.
+	var deferred = jQuery.Deferred();
+	// Load the page controller.
+	jsMVC.controller.page.load(pageName).done(function (page) {
+		// Set the page controller view property.
+		pagen.view = jQuery(jsMVC.controller.application.container);
+		// Call the page init method.
+		jsMVC.classes.initInstance(page, constructorParameters);
+		// Set html title from the page controller's method or property.
+		if (page.getTitle !== undefined && jQuery.isFunction(page.getTitle)) {
+			jsMVC.document.setTitle(page.getTitle());
+		} else if (page.title && typeof(page.title) === 'string') {
+			jsMVC.document.setTitle(page.title);
+		}
+		// Set favicon from the page controller's method or property.
+		if (page.getFavIcon !== undefined && jQuery.isFunction(page.getFavIcon)) {
+			jsMVC.document.setFavIcon(page.getFavIcon());
+		} else if (page.favIcon && typeof(page.favIcon) === 'string') {
+			jsMVC.document.setFavIcon(page.favIcon);
+		}
+		// Set the document language code from the page controller's method or property.
+		if (page.getLanguageCode !== undefined && jQuery.isFunction(page.getLanguageCode)) {
+			jsMVC.document.setLanguageCode(page.getLanguageCode());
+		} else if (page.languageCode && typeof(page.languageCode) === 'string') {
+			jsMVC.document.setLanguageCode(page.languageCode);
+		}
+		// Render all the views.
+		jsMVC.render.processViews(jsMVC.controller.application.container).done(function () {
+			// Call the page onLoad method.
+			if (page.onLoad !== undefined  && jQuery.isFunction(page.onLoad)) {
+				page.onLoad();
+			}
+			// Resolve the deferred returning the controller.
+			deferred.resolve(page);
+		});
+	}).fail(function (jqXHR, textStatus, errorThrown) {
+		// TODO: Do visually something on page load fail.
+		deferred.reject();
+	});
+	// Return the promise only.
+	return deferred.promise();
 };
 
 // Packages
