@@ -1079,9 +1079,6 @@ jsMVC.controller.application.Class = function (classMetadata, classConstructor) 
 // ****************************************************************************
 // ****************************************************************************
 
-// The page container.
-jsMVC.controller.page.container = "";
-
 // The page to load on init.
 jsMVC.controller.page.name = "";
 
