@@ -90,6 +90,8 @@ jsMVC.init.page = function (pageName, constructorParameters) {
 	var deferred = jQuery.Deferred();
 	// Load the page controller.
 	jsMVC.controller.page.load(pageName).done(function (page) {
+		// Set the active page name.
+		jsMVC.controller.page.name = pageName;
 		// Set the page controller view property.
 		page.view = jQuery(jsMVC.controller.application.container);
 		// Call the page init method.
@@ -1079,7 +1081,7 @@ jsMVC.controller.application.Class = function (classMetadata, classConstructor) 
 // ****************************************************************************
 // ****************************************************************************
 
-// The page to load on init.
+// The actual page loaded on init.
 jsMVC.controller.page.name = "";
 
 // The path prefix to get the server files.
