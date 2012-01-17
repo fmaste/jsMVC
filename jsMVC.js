@@ -55,6 +55,7 @@ jsMVC.init = function (appFolder, appContainer, appController, appParams) {
 };
 
 // Loads the application controller and calls its constructor method.
+// The applications provides the page name that will be loaded.
 // When finished all this the application onLoad method is called. 
 jsMVC.init.application = function (applicationName, constructorParameters) {
 	// Load the application controller.
@@ -63,8 +64,19 @@ jsMVC.init.application = function (applicationName, constructorParameters) {
 		jQuery(jsMVC.controller.application.container).data("data-jsMVC-application", application);
 		// Call the application init method.
 		jsMVC.classes.initInstance(application, constructorParameters);
-		// Set the application controller page property.
-		application.page = jQuery(jsMVC.controller.application.container);
+		// Get the page controller name.
+		var pageName = application.getPageName();
+		// Get the page controller constructor parameters.
+		var pageParams = application.getPageParams();
+		// Load the page.
+		jsMVC.init.page(pageName, pageParams).done(function (page) {
+			// Set the application controller page property.
+			application.page = page;
+			// Call the application onLoad method.
+			if (application.onLoad !== undefined  && jQuery.isFunction(application.onLoad)) {
+				application.onLoad();
+			}
+		});
 	}).fail(function (jqXHR, textStatus, errorThrown) {
 		// TODO: Do visually something on application load fail.
 	});
@@ -79,7 +91,7 @@ jsMVC.init.page = function (pageName, constructorParameters) {
 	// Load the page controller.
 	jsMVC.controller.page.load(pageName).done(function (page) {
 		// Set the page controller view property.
-		pagen.view = jQuery(jsMVC.controller.application.container);
+		page.view = jQuery(jsMVC.controller.application.container);
 		// Call the page init method.
 		jsMVC.classes.initInstance(page, constructorParameters);
 		// Set html title from the page controller's method or property.
