@@ -81,6 +81,7 @@ jsMVC.init.application = function (applicationName, constructorParameters) {
 		});
 	}).fail(function (jqXHR, textStatus, errorThrown) {
 		// TODO: Do visually something on application load fail.
+		jsMVC.error.log("Failed to load application \"" + applicationName + "\".");
 	});
 };
 
