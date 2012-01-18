@@ -101,7 +101,15 @@ jsMVC.init.application.getPageName = function (application) {
 			} else if (partKey == "path") {
 				matched = matched && part.test(location.pathname);
 			} else if (partKey == "query") {
-				matched = matched && part.test(location.search);
+				for (var queryKey in part) {
+					var queryRegex = part[queryKey];
+					var queryValue = jsMVC.utils.getUrlParameter(queryKey);
+					if (queryValue !== null) {
+						matched = matched && queryRegex.test(queryValue);
+					} else {
+						matched = false;
+					}
+				}
 			} else if (partKey == "fragment") {
 				matched = matched && part.test(location.hash);
 			}
