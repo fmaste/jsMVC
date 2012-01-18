@@ -67,9 +67,9 @@ jsMVC.init.application = function (applicationName, constructorParameters) {
 		// Apply the application styles.
 		jsMVC.render.styles(application.styles); // TODO: Wait for this deferred ???
 		// Get the page controller name.
-		var pageName = application.getPageName();
-		// Get the page controller constructor parameters.
-		var pageParams = application.getPageParams();
+		var pageName = jsMVC.init.application.getPageName(application);
+		// TODO: Get the page controller constructor parameters.
+		var pageParams = [];
 		// Load the page.
 		jsMVC.init.page(pageName, pageParams).done(function (page) {
 			// Set the application controller page property.
@@ -83,6 +83,34 @@ jsMVC.init.application = function (applicationName, constructorParameters) {
 		// TODO: Do visually something on application load fail.
 		jsMVC.error.log("Failed to load application \"" + applicationName + "\".");
 	});
+};
+
+jsMVC.init.application.getPageName = function (application) {
+	// Go through each page mapping.
+	for (var pageKey in application.pages) {
+		var pageMapper = application.pages[pageKey];
+		var matched = true;
+		for (var partKey in pageMapper) {
+			var part = pageMapper[partKey];
+			if (partKey == "scheme") {
+				matched = matched && part.test(location.protocol);
+			} else if (partKey == "domain") {
+				matched = matched && part.test(location.hostname);
+			} else if (partKey == "port") {
+				matched = matched && part.test(location.port);
+			} else if (partKey == "path") {
+				matched = matched && part.test(location.pathname);
+			} else if (partKey == "query") {
+				matched = matched && part.test(location.search);
+			} else if (partKey == "fragment") {
+				matched = matched && part.test(location.hash);
+			}
+		}
+		if (matched) {
+			return pageMapper.page;
+		}
+	}
+	return "main"; // The default page.
 };
 
 // Loads the page controller and calls its constructor method.
