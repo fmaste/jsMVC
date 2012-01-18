@@ -126,6 +126,7 @@ jsMVC.init.page = function (pageName, constructorParameters) {
 		});
 	}).fail(function (jqXHR, textStatus, errorThrown) {
 		// TODO: Do visually something on page load fail.
+		jsMVC.error.log("Failed to load page \"" + pageName + "\".");
 		deferred.reject();
 	});
 	// Return the promise only.
