@@ -125,6 +125,8 @@ jsMVC.init.page = function (pageName, constructorParameters) {
 		page.view = jQuery(jsMVC.controller.application.container);
 		// Call the page init method.
 		jsMVC.classes.initInstance(page, constructorParameters);
+		// Apply the page styles.
+		jsMVC.render.styles(page.styles); // TODO: Wait for this deferred ???
 		// Set html title from the page controller's method or property.
 		if (page.getTitle !== undefined && jQuery.isFunction(page.getTitle)) {
 			jsMVC.document.setTitle(page.getTitle());
