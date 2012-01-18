@@ -65,9 +65,9 @@ jsMVC.init.application = function (applicationName, constructorParameters) {
 		// Apply the application styles.
 		jsMVC.render.styles(application.styles); // TODO: Wait for this deferred ???
 		// Get the page controller name.
-		var pageName = application.getPageName();
-		// Get the page controller constructor parameters.
-		var pageParams = application.getPageParams();
+		var pageName = jsMVC.init.application.getPageName(application);
+		// TODO: Get the page controller constructor parameters.
+		var pageParams = [];
 		// Load the page.
 		jsMVC.init.page(pageName, pageParams).done(function (page) {
 			// Set the application controller page property.
@@ -79,7 +79,44 @@ jsMVC.init.application = function (applicationName, constructorParameters) {
 		});
 	}).fail(function (jqXHR, textStatus, errorThrown) {
 		// TODO: Do visually something on application load fail.
+		jsMVC.error.log("Failed to load application \"" + applicationName + "\".");
 	});
+};
+
+jsMVC.init.application.getPageName = function (application) {
+	// Go through each page mapping.
+	for (var pageKey in application.pages) {
+		var pageMapper = application.pages[pageKey];
+		var matched = true;
+		for (var partKey in pageMapper) {
+			var part = pageMapper[partKey];
+			if (partKey == "scheme") {
+				matched = matched && part.test(location.protocol);
+			} else if (partKey == "domain") {
+				matched = matched && part.test(location.hostname);
+			} else if (partKey == "port") {
+				matched = matched && part.test(location.port);
+			} else if (partKey == "path") {
+				matched = matched && part.test(location.pathname);
+			} else if (partKey == "query") {
+				for (var queryKey in part) {
+					var queryRegex = part[queryKey];
+					var queryValue = jsMVC.utils.getUrlParameter(queryKey);
+					if (queryValue !== null) {
+						matched = matched && queryRegex.test(queryValue);
+					} else {
+						matched = false;
+					}
+				}
+			} else if (partKey == "fragment") {
+				matched = matched && part.test(location.hash);
+			}
+		}
+		if (matched) {
+			return pageMapper.page;
+		}
+	}
+	return "main"; // The default page.
 };
 
 // Loads the page controller and calls its constructor method.
@@ -96,6 +133,8 @@ jsMVC.init.page = function (pageName, constructorParameters) {
 		page.view = jQuery(jsMVC.controller.application.container);
 		// Call the page init method.
 		jsMVC.classes.initInstance(page, constructorParameters);
+		// Apply the page styles.
+		jsMVC.render.styles(page.styles); // TODO: Wait for this deferred ???
 		// Set html title from the page controller's method or property.
 		if (page.getTitle !== undefined && jQuery.isFunction(page.getTitle)) {
 			jsMVC.document.setTitle(page.getTitle());
@@ -125,6 +164,7 @@ jsMVC.init.page = function (pageName, constructorParameters) {
 		});
 	}).fail(function (jqXHR, textStatus, errorThrown) {
 		// TODO: Do visually something on page load fail.
+		jsMVC.error.log("Failed to load page \"" + pageName + "\".");
 		deferred.reject();
 	});
 	// Return the promise only.
