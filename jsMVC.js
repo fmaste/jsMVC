@@ -85,8 +85,8 @@ jsMVC.init.application = function (applicationName, constructorParameters) {
 
 jsMVC.init.application.getPageName = function (application) {
 	// Go through each page mapping.
-	for (var pageKey in application.pages) {
-		var pageMapper = application.pages[pageKey];
+	for (var pageName in application.pages) {
+		var pageMapper = application.pages[pageName];
 		var matched = true;
 		for (var partKey in pageMapper) {
 			var part = pageMapper[partKey];
@@ -113,7 +113,7 @@ jsMVC.init.application.getPageName = function (application) {
 			}
 		}
 		if (matched) {
-			return pageMapper.page;
+			return pageName;
 		}
 	}
 	return "main"; // The default page.
