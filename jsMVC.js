@@ -53,7 +53,7 @@ jsMVC.init = function (appFolder, appContainer, appController, appParams) {
 };
 
 // Loads the application controller and calls its constructor method.
-// The applications provides the page name that will be loaded.
+// The application provides the page name that will be loaded.
 // When finished all this the application onLoad method is called. 
 jsMVC.init.application = function (applicationName, constructorParameters) {
 	// Load the application controller.
