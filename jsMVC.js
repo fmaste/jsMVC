@@ -85,9 +85,13 @@ jsMVC.init.application = function (applicationName, constructorParameters) {
 
 jsMVC.init.application.getPageName = function (application) {
 	// Go through each page mapping.
+	// The page mapping is an object with the various page names as property keys.
 	for (var pageName in application.pages) {
+		// Every page object has various properties to match with the URL.
 		var pageMapper = application.pages[pageName];
+		// By default every page matches unless proven guilty.
 		var matched = true;
+		// The keys of the page object ae the parts of the URL to match.
 		for (var partKey in pageMapper) {
 			var part = pageMapper[partKey];
 			if (partKey == "scheme") {
