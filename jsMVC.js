@@ -9,6 +9,14 @@ var jsMVC = {};
 // TODO: Include jQuery inlined here in noConflict mode.
 $.noConflict();
 
+// JSON
+// ****************************************************************************
+// ****************************************************************************
+
+// TODO: Include the minified JSON library here.
+// A JSON library that does the same as the standar ECMA JSON object is needed
+// in case an older brower that does not have it is been used.
+
 // INIT
 // ****************************************************************************
 // ****************************************************************************
@@ -613,9 +621,39 @@ jsMVC.document.setLanguageCode = function (languageCode) {
 // ****************************************************************************
 // ****************************************************************************
 
+jsMVC.model = function (controller) {
 
-// TODO TODO TODO TODO
+	this.get = function (url, params) {
+		var settings = {
+			accepts: "application/json",
+			cache: false,
+			contentType: "application/x-www-form-urlencoded",
+			context: controller,
+			data: params,
+			dataType: "json",
+			type: "GET",
+			url: url
+		};
+		return jQuery.ajax(settings);
+	};
 
+	// Pages fetched with POST are never cached, so the cache and ifModified
+	// options in jQuery.ajaxSetup() have no effect on these requests.
+	this.post = function (url, params) {
+		var settings = {
+			accepts: "application/json",
+			cache: false,
+			contentType: "application/json",
+			context: controller,
+			data: JSON.stringify({json: params}),
+			dataType: "json",
+			type: "POST",
+			url: url
+		};
+		return jQuery.ajax(settings);
+	};
+
+};
 
 // VIEW
 // ****************************************************************************
@@ -1527,6 +1565,10 @@ jsMVC.render.linkViewAndController = function (viewContainerSelector, viewName, 
 		// TODO: Set the view property as everything except its subviws.
 		// parent.view = jQuery(viewContainerSelector).find("*").not(".jsMVC-view");
 		parent.view = jQuery(viewContainerSelector);
+		// Set the get and post functions.
+		var model = new jsMVC.model(controller);
+		parent["get"] = model["get"];
+		parent.post = model.post;
 		var parent = parent.parent;
 	}
 }
@@ -1570,7 +1612,7 @@ jsMVC.render.getTranslationsToInclude = function (viewContainerSelector, transla
 jsMVC.render.includeTranslation = function (translationContainerSelector, translationString) {
 	jQuery(translationContainerSelector).html(translationString);
 };
-	
+
 // UTILITIES
 // ****************************************************************************
 // ****************************************************************************
