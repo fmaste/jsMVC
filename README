@@ -1,0 +1,4 @@
+An MVC framework entirely in JavaScript. An ongoing investigation about the extreme use of JavaScript for mostly static websites that can be uploaded to a simple file server for easier and cheaper operation. Dynamic data can be retrieved from different domains if needed using JSONP or similar techniques.
+
+Every view has its own isolated logic on a Java like class system (with parents and everything but in JavaScript obviously) were views are added, removed and replaced dynamically using the "this.view" property of the logic objects.
+The framework also handles the use of different JavaScript libraries, asynchronous pre-fetching of images, loading of styles, translations and an internal cache system.
